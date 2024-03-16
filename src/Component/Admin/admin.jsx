@@ -3,6 +3,12 @@ import styled from 'styled-components'
 import { viewByAdmin } from '../Services/application';
 import Header from '../Header'
 import Footer from '../Footer'
+import {FaSearch} from 'react-icons/fa'
+
+const Searchicon= styled(FaSearch)`
+position: absolute;
+right: 35px;
+`;
 
 const Wrapper = styled.div``;
 
@@ -14,37 +20,49 @@ border-radius: 10px;
 `;
 const Input = styled.input`
 margin: 20px;
+width: 50%;
 padding: 20px;
 font-size: 20px;
 border: 1px solid #1f1010;
 border-radius: 10px;
+
+@media(max-width: 768px){
+    width: 100%;
+}
 `;
 
 const Fields = styled.div`
 margin: 5px;
-`;
-
-const Button = styled.div`
-background-color: #2196F3;
-padding: 0 15px;
-border-radius: 10px;
-align-items: center;
-display: flex;
-color: white;
-cursor: pointer;
-height: 50px;
-margin-right: 40px;
 
 `;
+
 
 function Admin() {
   const [data,setData]=useState([{}])
 
-       
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+
+
+  const handleInputChange = (event) => {
+    const { value } = event.target;
+    setSearchTerm(value);
+    filterData(value);
+  };
+
+
+  const filterData = (searchTerm) => {
+    const filteredData = data.filter((item) =>
+    item.skills.some(name => name.toLowerCase().includes(searchTerm.toLowerCase()))
+    );
+    setFilteredData(filteredData);
+  };
+
 
     useEffect(() => {
         viewByAdmin().then((result)=>{
             setData(result.data)
+            setFilteredData(result.data)
             console.log("result from viewByAdmin",result)
         })
     },[])
@@ -53,17 +71,23 @@ function Admin() {
     <>
     <Header/>
     <Wrapper>
-     <div className='df' style={{justifyContent:"end",alignItems:"center"}}> <Input type='text' placeholder='Search' style={{width:"40%"}}></Input><Button>Search</Button></div>
-      {data.map((item,index)=>{
-          return(
+     <div className='df' style={{justifyContent:"end",alignItems:"center"}}> <Input type='text' placeholder='Search' value={searchTerm} onChange={handleInputChange}></Input><Searchicon /></div>
+      {filteredData.map((item,index)=>(
+          
               <Div key={index}>
                   <Fields>Name - {item.name}</Fields>
                   <Fields>Email - {item.email}</Fields>
                   <Fields>Phone No.- {item.phoneno}</Fields>
-                  <Fields>Skills - {item.skills}</Fields>
+                  <div className='df'>
+                    <Fields>Skills - </Fields> 
+                    <div className='skilldf'> {item.skills.map((skill,index)=>
+                  (<Fields key={index}>{skill}</Fields>))}</div>
+                  </div>
+                 
+                  
               </Div>
-          )
-      })
+          
+      ))
     }
     </Wrapper>
     <Footer/>

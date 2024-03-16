@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { GoSignOut } from "react-icons/go";
 
 const Wrapper = styled.div`
 display: flex;
@@ -7,6 +8,10 @@ justify-content: space-between;
 background-color: #2B79DF;
 height: 20px;
 padding: 40px 50px;
+
+@media(max-width: 768px){
+    padding: 30px 20px;;
+}
 `;
 
 const Div = styled.div`
@@ -26,7 +31,7 @@ function Index() {
           Job Application
         </Div>
         <Div>
-          <div onClick={()=>{handleLogout()}}>LogOut</div>  
+          <div  onClick={()=>{handleLogout()}}><GoSignOut /></div>  
         </Div>
     </Wrapper>
   )

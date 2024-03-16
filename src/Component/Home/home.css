@@ -79,3 +79,13 @@
     margin-top: 20PX;
     height: 50px;
   }
+  .skilldf{
+    display: flex;
+    @media(max-width: 768px){
+      display: block;
+    }
+  }
+
+  .css-13cymwt-control{
+    height:50px;
+  }

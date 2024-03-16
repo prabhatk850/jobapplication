@@ -43,6 +43,11 @@ margin-bottom: 20px;
 const HeaderText = styled.h2`
 color: rgb(68, 163, 255);
 font-weight: 500;
+
+@media(max-width: 768px){
+    font-size: 20px;
+
+}
 `;
 
 const FormContainer = styled.div`
@@ -216,7 +221,7 @@ function Index() {
     />
           
         <div className='df'>
-            <div className='m df al'>Ready to Locate</div>
+            <div className='m df al'>Ready to Relocate</div>
             <label className="switch">
                 <input  type="checkbox" onChange={(e)=>{setReadyToLocate(!readytolocate)}} value={readytolocate}/>
                 <span className="slider round"></span>

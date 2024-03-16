@@ -88,7 +88,7 @@ const Email = styled.input`
   width: 80%;  
   color: black;
   @media (max-width:767px){
-    color: white;
+    color: black;
   }
 `;
 const SingUpInputStyle = styled.div`
@@ -120,7 +120,7 @@ const Password = styled.input`
   width: 80%;
   color: black;
   @media (max-width:767px){
-    color: white;
+    color: black;
   }
 `;
 const RePassword = styled.input`
@@ -139,7 +139,7 @@ const RePassword = styled.input`
   width: 80%;
   color: black;
   @media (max-width:767px){
-    color: white;
+    color: black;
   }
 `;
 
