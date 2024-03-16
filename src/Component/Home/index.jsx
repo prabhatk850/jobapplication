@@ -212,12 +212,13 @@ function Index() {
             <Input value={state} type="text" onChange={(e)=>{setState(e.target.value)}} placeholder="State"/>
            
             <Select
-    styles={{outline: "none",marginTop:"20px",marginBottom:"20px"}}
+      styles={{outline: "none" ,marginTop:"20px",marginBottom:"20px"}}
       isMulti
       name="skills"
       options={options}
       className="basic-multi-select ac"
       onChange={handleChange}
+      defaultheight={100}
       value={selectedOptions}
       placeholder="Enter Skills"
     />

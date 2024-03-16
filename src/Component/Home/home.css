@@ -77,7 +77,6 @@
   .ac{
     outline: none;
     margin-top: 20PX;
-    height: 50px;
   }
   .skilldf{
     display: flex;
@@ -86,6 +85,4 @@
     }
   }
 
-  .css-13cymwt-control{
-    height:50px;
-  }
+ 
