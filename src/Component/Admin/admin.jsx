@@ -78,6 +78,7 @@ function Admin() {
                   <Fields>Name - {item.name}</Fields>
                   <Fields>Email - {item.email}</Fields>
                   <Fields>Phone No.- {item.phoneno}</Fields>
+                  <Fields>Experience - {item.experience}</Fields>
                   <div className='df'>
                     <Fields>Skills - </Fields> 
                     <div className='skilldf'> {item.skills.map((skill,index)=>

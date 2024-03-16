@@ -132,6 +132,7 @@ function Index() {
       setSelectedOptions(options);
       console.log("skills", selectedOptions);
       setSkills(options)
+      console.log("first",skills)
       return(skills)
     };
 
@@ -165,6 +166,7 @@ function Index() {
     
 
     const handleSave = () => {
+      console.log("prabhat",skills)
         const data = {
             phoneno,
             dob,
@@ -210,7 +212,7 @@ function Index() {
             <Input value={state} type="text" onChange={(e)=>{setState(e.target.value)}} placeholder="State"/>
            
             <Select
-    styles={{outline: "none",marginTop:"20px"}}
+    styles={{outline: "none",marginTop:"20px",marginBottom:"20px"}}
       isMulti
       name="skills"
       options={options}
