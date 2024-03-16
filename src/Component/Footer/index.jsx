@@ -8,7 +8,7 @@ const EachSlide = styled.div`
   justify-content: center;
   background-size: cover;
   height: 30px;
-  background-color: #2B79DF;
+  background-color: #085A9C;
   color: white;
 `;
 

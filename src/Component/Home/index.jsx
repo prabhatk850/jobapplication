@@ -16,7 +16,7 @@ import Select from 'react-select';
 const Wrapper = styled.div`
 align-items: center;
 display: flex;
-
+background-image: url(https://nispand-prod.oss-ap-south-1.aliyuncs.com/Images/movingWave.gif);
 justify-content: center;
 
 `;
