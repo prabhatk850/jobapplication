@@ -19,6 +19,9 @@
     width: 0;
     height: 0;
   }
+  .end{
+    justify-content: end;
+  }
   
   .slider {
     position: absolute;
@@ -76,7 +79,7 @@
 
   .ac{
     outline: none;
-    margin-top: 20PX;
+    margin-top: 20px;
   }
   .skilldf{
     display: flex;

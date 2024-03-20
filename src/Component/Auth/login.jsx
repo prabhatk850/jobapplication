@@ -310,6 +310,7 @@ function Login() {
         </SingUpSection>
       </Section2>
       </Desktop>
+      
       <Mobile>
       <Title>Welcome Back!</Title>
       <Text>Please sign in to your account</Text>

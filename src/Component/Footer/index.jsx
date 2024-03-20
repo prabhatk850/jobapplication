@@ -2,6 +2,7 @@ import { Slide } from "react-slideshow-image";
 import "react-slideshow-image/dist/styles.css";
 import styled from "styled-components";
 
+
 const EachSlide = styled.div`
   display: flex;
   align-items: center;
@@ -21,6 +22,7 @@ const properties = {
 const Index = () => {
    
   return (
+    
     <Slide {...properties} duration="3000" transitionDuration="300">
       <EachSlide>
         Managed By Prabhat Kumar Verma
@@ -32,6 +34,7 @@ const Index = () => {
         Designed By Prabhat
       </EachSlide>
     </Slide>
+   
   );
 };
 
