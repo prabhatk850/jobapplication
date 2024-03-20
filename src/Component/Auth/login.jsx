@@ -219,8 +219,8 @@ function Login() {
        if(res.status === 200){
        localStorage.setItem("token",res.data.token);
        localStorage.setItem("isAdmin",res.data.isAdmin);
-       toast.success("Login Successfull");
        navigate("/");
+       toast.success("Login Successfull");
      // clear the states 
      clearForm()
      // close the window
@@ -239,7 +239,7 @@ function Login() {
     const listener = event => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         console.log("Enter key was pressed. Run your function.");
-        // handleLogin()
+        handleLogin()
       }
     };
     document.addEventListener("keydown", listener);
@@ -310,7 +310,7 @@ function Login() {
         </SingUpSection>
       </Section2>
       </Desktop>
-      
+
       <Mobile>
       <Title>Welcome Back!</Title>
       <Text>Please sign in to your account</Text>
