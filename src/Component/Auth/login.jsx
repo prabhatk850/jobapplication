@@ -305,7 +305,7 @@ function Login() {
             </SingUpInputStyle>
           </Fileds>
           <SubmitButton 
-          onClick={(e)=>{handleLogin(e)}}
+          onClick={(e)=>{handleLogin()}}
           >LogIn</SubmitButton>
         </SingUpSection>
       </Section2>

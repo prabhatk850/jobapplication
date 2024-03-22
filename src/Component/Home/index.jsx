@@ -8,6 +8,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './home.css'
 import Select from 'react-select';
+// import AWS from 'aws-sdk';
+
 
 
 
@@ -132,6 +134,7 @@ function Index() {
     const [resume, setResume] = useState([])
     const [coverletter, setCoverLetter] = useState([])
     const [bestTimeToReach, setBestTimeToReach] = useState('')
+    // const [file, setFile] = useState(null)
 
     const options = [
       { value: 'React.js', label: 'React.js' },
@@ -163,6 +166,7 @@ function Index() {
       console.log("options",options)
       return(skills)
     };
+
 
     const handleSecondaryChange = (options) => {
       setSecondaryOptions(options);
@@ -243,10 +247,49 @@ function Index() {
     const handleFileChange = (event) => {
       const file = event.target.files[0];
       console.log("filename",file)
+      // setFile(file)
+      // uploadFile(file)
       return(URL.createObjectURL(file));
     
     
   }
+
+    // const uploadFile = async () => {
+    //   const S3_BUCKET=process.env.REACT_APP_S3_BUCKET;
+    //   const REGION = "region";
+  
+    //   AWS.config.update({
+    //     accessKeyId: "youraccesskeyhere",
+    //     secretAccessKey: "yoursecretaccesskeyhere",
+    //   });
+    //   const s3 = new AWS.S3({
+    //     params: { Bucket: S3_BUCKET },
+    //     region: REGION,
+    //   });
+  
+    //   const params = {
+    //     Bucket: S3_BUCKET,
+    //     Key: file.name,
+    //     Body: file,
+    //   };
+  
+    //   const upload = s3
+    //     .putObject(params)
+    //     .on("httpUploadProgress", (evt) => {
+    //       console.log(
+    //         "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
+    //       );
+    //     })
+    //     .promise();
+  
+    //   await upload.then((err, data) => {
+    //     console.log(err);
+    //     alert("File uploaded successfully.");
+    //   });
+    // };
+  
+
+   
     
 
     
@@ -296,7 +339,10 @@ function Index() {
       placeholder="Enter Skills"
     />
 
-          <Input3 style={{marginTop:"30px"}} className='df al'><div> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} value={resume} type="file" onChange={(e)=>{setResume(handleFileChange())}} placeholder="Resume"/></Input3>
+
+
+
+          <Input3 style={{marginTop:"30px"}} className='df al'><div> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} value={resume} type="file" onChange={(e)=>{setResume(handleFileChange())}} placeholder="Resume" /></Input3>
           <Input3 className='df al'><div> cover letter : </div>   <Input style={{marginTop:"30px",outline:"none"}} value={coverletter} type="file" onChange={(e)=>{setCoverLetter(handleFileChange())}} placeholder="Cover Letter"/></Input3>
 
             {/* <Input value={secondarySkills} type="text" onChange={(e)=>{setSecondarySkills(e.target.value)}} placeholder="Secondary Skills"/> */}
@@ -312,7 +358,14 @@ function Index() {
                 <span className="slider round"></span>
             </label>
         </div>
-            <Input value={bestTimeToReach} type="text" onChange={(e)=>{setBestTimeToReach(e.target.value)}} placeholder="Best Time To Reach"/>
+        
+
+        
+
+  
+
+            {/* <Input value={readytolocate} type="text" onChange={(e)=>{setReadyToLocate(e.target.value)}} placeholder="Ready to Relocate"/> */}
+            <Input3 style={{marginTop:"30px"}} className='df al'><div> Best Time to Reach : </div>   <Input style={{outline:"none",width:"100px"}}  value={bestTimeToReach} type="time" onChange={(e)=>{setBestTimeToReach(e.target.value)}}/></Input3>
             <Input2 value={comment} as="textarea" onChange={(e)=>{setComment(e.target.value)}} placeholder="Comments/Remarks"/>
             <div className='df end'><Button onClick={()=>handleSave()}>Apply</Button></div>
           </FormContainer>

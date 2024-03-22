@@ -10,7 +10,9 @@ position: absolute;
 right: 35px;
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+
+`;
 
 const Div = styled.div`
 margin: 20px;
@@ -33,6 +35,15 @@ border-radius: 10px;
 
 const Fields = styled.div`
 margin: 5px;
+
+`;
+
+const Nodata = styled.div`
+margin: 30px;
+font-size: 30px;
+display: flex;
+justify-content: center;
+align-items: center;
 
 `;
 
@@ -72,6 +83,7 @@ function Admin() {
     <Header/>
     <Wrapper>
      <div className='df' style={{justifyContent:"end",alignItems:"center"}}> <Input type='text' placeholder='Search' value={searchTerm} onChange={handleInputChange}></Input><Searchicon /></div>
+      {filteredData.length===0 && <Nodata>No Data Found</Nodata>}
       {filteredData.map((item,index)=>(
           
               <Div key={index}>
@@ -90,6 +102,7 @@ function Admin() {
           
       ))
     }
+
     </Wrapper>
     <Footer/>
     </>
