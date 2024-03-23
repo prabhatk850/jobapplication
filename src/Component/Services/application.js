@@ -47,8 +47,38 @@ export const viewByAdmin=(data)=>{
 
 }
 
+export const uploadFile = (data) => {
+    const formData = new FormData();
+    console.log("data",data.resume)
+    const resume= data.resume
+    formData.append('resume', resume);
+
+    const coverletter = data.coverletter
+    formData.append('coverletter', coverletter);
+    formData.append('applicationDetails', JSON.stringify(data));
+    // console.log("first formData",formData)
+    for (const pair of formData.entries()) {
+        console.log(pair[0]+ ', ' + pair[1]); 
+    }
+  
+    
+      return axiosInstance.post('/application', formData,{
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }).then((result)=>{
+        return result
+      }).catch((error)=>{
+        console.log("error from uploadFile",error)
+    }
+)}
+  
+
+
+
 export const updateDetails=(data)=>{
     return axiosInstance.post(`/application`,data).then((result)=>{
+        console.log("result from updateDetails",result)
     return result
     }).catch((error)=>{
         console.log("error from submitApplication",error)
@@ -64,6 +94,7 @@ export const doLoggedIn = async(data,next)=>{
  // doLoggedOut
     export const doLoggedOut = async(next)=>{
         window.localStorage.clear()
+        
         
     }
 

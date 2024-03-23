@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Header from '../Header'
 import Footer from '../Footer'
-import {updateDetails,viewApplication} from '../Services/application'
+import {uploadFile,viewApplication} from '../Services/application'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './home.css'
@@ -198,7 +198,7 @@ function Index() {
         secondarySkills: secondaryOptions.map((item)=>item.value),
         degree,
         resume,
-        coverletter,   
+        coverletter,
         bestTimeToReach, 
     }
 
@@ -230,11 +230,9 @@ function Index() {
 
     
 
-    const handleSubmit = () => {
-      console.log("prabhat",skills)
-        
+    const handleSubmit = () => {    
         console.log("first",data)
-        updateDetails(data).then((res) => {
+        uploadFile(data).then((res) => {
            if(res.status === 200){
             toast.success("Profile Updated Successfully")
             navigate('/thankyou',{state:{data}})
@@ -247,56 +245,16 @@ function Index() {
         })
     }
 
-    const handleFileChange = (event) => {
-      const file = event.target.files[0];
+    const handleFileChange = (e) => {
+      const file = e.target.files[0];
       console.log("filename",file)
-      // setFile(file)
-      // uploadFile(file)
-      return(URL.createObjectURL(file));
+      // return(URL.createObjectURL(file));
+      return(file);
     
     
   }
 
-    // const uploadFile = async () => {
-    //   const S3_BUCKET=process.env.REACT_APP_S3_BUCKET;
-    //   const REGION = "region";
-  
-    //   AWS.config.update({
-    //     accessKeyId: "youraccesskeyhere",
-    //     secretAccessKey: "yoursecretaccesskeyhere",
-    //   });
-    //   const s3 = new AWS.S3({
-    //     params: { Bucket: S3_BUCKET },
-    //     region: REGION,
-    //   });
-  
-    //   const params = {
-    //     Bucket: S3_BUCKET,
-    //     Key: file.name,
-    //     Body: file,
-    //   };
-  
-    //   const upload = s3
-    //     .putObject(params)
-    //     .on("httpUploadProgress", (evt) => {
-    //       console.log(
-    //         "Uploading " + parseInt((evt.loaded * 100) / evt.total) + "%"
-    //       );
-    //     })
-    //     .promise();
-  
-    //   await upload.then((err, data) => {
-    //     console.log(err);
-    //     alert("File uploaded successfully.");
-    //   });
-    // };
-  
-
    
-    
-
-    
-
   return (
   <>
       <Header/>
@@ -345,11 +303,8 @@ function Index() {
 
 
 
-          <Input3 style={{marginTop:"30px"}} className='df al'><div> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} value={resume} type="file" onChange={(e)=>{setResume(handleFileChange())}} placeholder="Resume" /></Input3>
-          <Input3 className='df al'><div> cover letter : </div>   <Input style={{marginTop:"30px",outline:"none"}} value={coverletter} type="file" onChange={(e)=>{setCoverLetter(handleFileChange())}} placeholder="Cover Letter"/></Input3>
-
-            {/* <Input value={secondarySkills} type="text" onChange={(e)=>{setSecondarySkills(e.target.value)}} placeholder="Secondary Skills"/> */}
-          
+          <Input3 style={{marginTop:"30px"}} className='df al'><div> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setResume(handleFileChange(e))}} placeholder="Resume" /></Input3>
+          <Input3 className='df al'><div> cover letter : </div>   <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input3>
             <Input  value={city} type="text" onChange={(e)=>{setCity(e.target.value)}} placeholder="City"/>
             <Input value={state} type="text" onChange={(e)=>{setState(e.target.value)}} placeholder="State"/>
            

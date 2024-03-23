@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+
 import styled from 'styled-components';
 import {useLocation} from 'react-router-dom';
+import { useEffect,useState } from 'react';
 
 const Wrapper = styled.div`
 margin: 10%;
@@ -15,20 +16,38 @@ margin: 10px 0;
 font-size: 20px;
 `;
 
+
 function AdminNext(){
 
     const {state} = useLocation();
-    const {name,email,phone,dob,skills,secondarySkills,city,readytolocate,experience,comment,degree,resume,coverletter,bestTimeToReach,additionalExperience} = state || {};
-    useEffect(() => {
-        console.log("first",state)
-    },[])
+    const {name,email,phoneno,dob,skills,secondarySkills,city,readytolocate,experience,comment,degree,resume,states,coverletter,bestTimeToReach,additionalExperience} = state || {};
+
+const [locate,setLocate]=useState("");
+const relocate=()=>{
+    if(readytolocate===true){
+        setLocate("Yes")
+    }
+    else{
+        setLocate("No")
+    }
+}
+
+useEffect(()=>{
+    window.scrollTo(0,0);
+    relocate()
+})
+
+
+
+
 
     return(
         <Wrapper>
             <h1>User Details</h1>
             <Div>Name- {name}</Div>
-            <Div>Email- {email}</Div>
-            <Div>Phone no. - {phone}</Div>
+            
+            <Div >Email- {email}</Div>
+            <Div>Phone no. - {phoneno}</Div>
             <Div>Date of Birth- {dob}</Div>
             <Div className='df'>
                     <Fields>Skills - </Fields> 
@@ -44,14 +63,14 @@ function AdminNext(){
                   (<Fields key={index}>{secondarySkills},</Fields>))}</div>
             </Div>      
            
-            {/* <Div>State- {land}</Div> */}
+            <Div>State- {states}</Div>
             <Div>City- {city}</Div>
-            <Div>Ready to Locate- {readytolocate}</Div>
+            <Div>Ready to Locate- {locate}</Div>
             <Div>Experience- {experience}</Div>
             <Div>Comment- {comment}</Div>
             <Div>Degree- {degree}</Div>
-            <Div>Resume- {resume}</Div>
-            <Div>Coverletter- {coverletter}</Div>
+            <Div className='df' onClick={() => window.open(resume, '_blank')}>Resume- <div style={{color:"blue"}}>{"View"}</div> </Div>
+            <Div className='df' onClick={() => window.open(coverletter, '_blank')}>Coverletter- <div style={{color:"blue"}}>{"View"}</div></Div>
             <Div>Best time to reach- {bestTimeToReach}</Div>
             <Div>Additional Experience- {additionalExperience}</Div>
             

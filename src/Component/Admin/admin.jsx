@@ -100,7 +100,7 @@ function Admin() {
                 dob:item.dob,
                 skills:item.skills,
                 secondarySkills:item.secondarySkills,
-                state:item.state,
+                states:item.state,
                 city:item.city,
                 readytolocate:item.readytolocate,
                 experience:item.experience,
