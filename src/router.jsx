@@ -8,6 +8,8 @@ import PrivateRoutes from './Component/PrivateRoutes/privateroutes';
 import Admin from './Component/Admin/admin';
 import Thankyou from './Component/Home/thankyou';
 import Adminroutes from './Component/PrivateRoutes/adminroutes';
+import AdminNext from './Component/Admin/adminnext';
+import Preview from './Component/Home/preview';
 
 function Router (){
     return(
@@ -19,6 +21,8 @@ function Router (){
             <Route path="/" element={<PrivateRoutes/>}>
             <Route path="/" element={<Home/>}/> 
             <Route path="/thankyou" element={<Thankyou/>} />
+            <Route path="/preview" element={<Preview/>} />
+            <Route path='/userdetail' element={<AdminNext/>}/>
             </Route> 
 
             <Route path='/admin' element={<Adminroutes/>}>

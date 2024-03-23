@@ -183,6 +183,24 @@ function Index() {
       
         return `${year}-${month}-${day}`;
       };
+      const data = {
+        phoneno,
+        name,
+        email,
+        dob,
+        comment,
+        skills: selectedOptions.map((item)=>item.value),
+        state,
+        city,
+        experience,
+        additionalExperience, 
+        readytolocate,
+        secondarySkills: secondaryOptions.map((item)=>item.value),
+        degree,
+        resume,
+        coverletter,   
+        bestTimeToReach, 
+    }
 
     useEffect(() => {  
       viewApplication().then((res) => {
@@ -212,29 +230,14 @@ function Index() {
 
     
 
-    const handleSave = () => {
+    const handleSubmit = () => {
       console.log("prabhat",skills)
-        const data = {
-            phoneno,
-            dob,
-            comment,
-            skills: selectedOptions.map((item)=>item.value),
-            state,
-            city,
-            experience,
-            additionalExperience, 
-            readytolocate,
-            secondarySkills: secondaryOptions.map((item)=>item.value),
-            degree,
-            resume,
-            coverletter,   
-            bestTimeToReach, 
-        }
+        
         console.log("first",data)
         updateDetails(data).then((res) => {
            if(res.status === 200){
             toast.success("Profile Updated Successfully")
-            navigate('/thankyou')
+            navigate('/thankyou',{state:{data}})
         }
         else{
             toast.error("Something went wrong")
@@ -367,7 +370,7 @@ function Index() {
             {/* <Input value={readytolocate} type="text" onChange={(e)=>{setReadyToLocate(e.target.value)}} placeholder="Ready to Relocate"/> */}
             <Input3 style={{marginTop:"30px"}} className='df al'><div> Best Time to Reach : </div>   <Input style={{outline:"none",width:"100px"}}  value={bestTimeToReach} type="time" onChange={(e)=>{setBestTimeToReach(e.target.value)}}/></Input3>
             <Input2 value={comment} as="textarea" onChange={(e)=>{setComment(e.target.value)}} placeholder="Comments/Remarks"/>
-            <div className='df end'><Button onClick={()=>handleSave()}>Apply</Button></div>
+            <div className='df end'><Button onClick={()=>handleSubmit()}>Apply</Button></div>
           </FormContainer>
           <div className='seperetor b m'></div>
         </InnerContainer>

@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useLocation } from 'react-router-dom';
 import {viewApplication} from '../Services/application'
 
 const Wrapper = styled.div`
@@ -50,6 +50,9 @@ function Thankyou() {
 
     const navigate = useNavigate();
 
+    const {state}= useLocation();
+    const {data}=state;
+
     const [ _id, setId] = React.useState('')
 
     const onTop = () => {
@@ -57,7 +60,7 @@ function Thankyou() {
     }
     useEffect(() => {
         onTop()
-
+        console.log("first",data)
         viewApplication().then((res) => {
             setId(res.data._id)
         }).catch((error) => {
@@ -75,7 +78,7 @@ function Thankyou() {
             </InnerContainer>
 
             <Div><Button onClick={()=>navigate('/')}>edit</Button>
-            <Button onClick={()=>navigate('/')}>Preview</Button></Div>
+            <Button onClick={()=>navigate('/preview',{state:{data}})}>Preview</Button></Div>
             </div>
            
         </Wrapper>
