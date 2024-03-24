@@ -7,15 +7,31 @@ import { FaRegCopy } from 'react-icons/fa';
 const Wrapper = styled.div`
 padding: 10%;
 background-color: aliceblue;
+display: flex;
+flex-direction: column;
+color: #102465d9;
+gap: 20px;
+@media (max-width: 768px){
+    padding: 5%;
+
+}
 `;
 
 const Fields = styled.div`
+display: flex;
+align-items: center;
 
 `;
 
 const Div = styled.div`
 margin: 10px 0;
 font-size: 20px;
+
+@media (max-width: 768px){
+    font-size: 17px;
+    margin: 20px 0;
+
+}
 `;
 
 const Buttoncontainer = styled.div`
@@ -27,9 +43,15 @@ display: flex;
 justify-content: center;
 align-items: center;
 cursor: pointer;
-margin: 5px 0 0 10px;
+margin: 0 0 0 10px;
 color: white;
 
+@media (max-width: 768px){
+    height: 25px;
+    width: 25px;
+    margin: 0 0 0 15px;
+
+}
 `;
 
 
@@ -67,8 +89,8 @@ function handleCopy (){
         <Wrapper>
             <ToastContainer/>
             <h1>User Details</h1>
-            <Div>Name- {name}</Div>
-            <div className='df'><Div>Email- {email}</Div><Buttoncontainer><FaRegCopy style={{height:"20px",width:"20px"}} onClick={handleCopy}/></Buttoncontainer></div>
+            <Fields style={{fontSize:"25px"}} className='df m'>Name- <h2> {name}</h2></Fields>
+            <div style={{fontSize:"20px"}} className='df'>Email-<h4> {email}</h4><Buttoncontainer><FaRegCopy style={{height:"20px",width:"20px"}} onClick={handleCopy}/></Buttoncontainer></div>
             <Div>Phone no. - {phoneno}</Div>
             <Div>Date of Birth- {dob}</Div>
             <Div className='df'>

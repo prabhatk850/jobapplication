@@ -15,16 +15,39 @@ const InnerContainer = styled.div`
 background-color: #eed6d6d7;
 padding: 70px 30px;
 border-radius: 10px;
+@media(max-width: 768px){
+    margin: 20px;
 
+}
 `;
 
 const Heading = styled.div`
 font-size: 60px;
+@media(max-width: 768px){
+   font-size: 40px;
+
+}
 `;
 
 const SubHead = styled.div`
 font-size: 30px;
 margin: 20px;
+@media(max-width: 768px){
+   font-size: 20px;
+
+}
+`;
+
+const Applino = styled.div`
+font-size: 20px;
+font-weight: 600;
+display: flex;
+margin-left: 10px;
+gap: 10px;
+@media(max-width: 768px){
+   font-size: 13px;
+
+}
 `;
 
 const Button = styled.button`
@@ -44,6 +67,8 @@ display: flex;
 margin-top: 20px;
 justify-content: end;
 `;
+
+
 
 
 
@@ -75,7 +100,7 @@ function Thankyou() {
             <InnerContainer>
             <Heading>Thank you for your submission</Heading>
             <SubHead>Your application has been submitted successfully</SubHead>
-            <h3 style={{marginLeft:"20px"}}>Appplication: {_id} </h3>
+            <Applino >Application: <div style={{fontWeight:"200"}}>{_id}</div> </Applino>
             </InnerContainer>
 
             <Div><Button onClick={()=>navigate('/')}>edit</Button>
