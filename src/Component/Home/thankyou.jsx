@@ -7,11 +7,12 @@ const Wrapper = styled.div`
 display: flex;
 justify-content: center;
 align-items: center;
-height: 90vh;
+height: 100vh;
+background-color: #4284e1;
 `;
 
 const InnerContainer = styled.div`
-background-color: #eed6d64b;
+background-color: #eed6d6d7;
 padding: 70px 30px;
 border-radius: 10px;
 

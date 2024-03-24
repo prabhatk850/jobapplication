@@ -56,7 +56,8 @@ export const uploadFile = (data) => {
     const coverletter = data.coverletter
     formData.append('coverletter', coverletter);
     formData.append('applicationDetails', JSON.stringify(data));
-    // console.log("first formData",formData)
+    console.log("first formData",formData)
+    
     for (const pair of formData.entries()) {
         console.log(pair[0]+ ', ' + pair[1]); 
     }

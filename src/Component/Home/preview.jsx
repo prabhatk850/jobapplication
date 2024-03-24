@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { doLoggedOut } from "../Services/application";
 import { useLocation, useNavigate} from "react-router-dom";
-// import { application } from "express";
+
 
 const Wrapper = styled.div`
-margin: 10%;
+padding: 10%;
 display: flex;
 align-items: center;
 justify-content: center;
+background-color: aliceblue;
 `;
 
 const Heading = styled.div`
@@ -40,6 +41,7 @@ margin: 15px 0;
 font-size: 20px;
 color: #1E3790;
 display: flex;
+align-items: center;
 
 `;
 
@@ -68,6 +70,11 @@ function Preview() {
         }  
      
     },[]);
+
+    const handlelogout=()=>{
+        doLoggedOut()
+        navigate('/login')
+    }
 
    
         
@@ -111,7 +118,8 @@ function Preview() {
                 </>
 
                 <div style={{display:"flex",justifyContent:"center",marginTop:"110px"}}><Button onClick={()=>navigate('/')}>Edit</Button></div>
-                <div style={{display:"flex",justifyContent:"center"}}><Button onClick={doLoggedOut()}>Log out</Button></div>
+                
+                <div style={{display:"flex",justifyContent:"center"}}><Button onClick={handlelogout}>Log out</Button></div>
            </Div>
         </Wrapper>
     )

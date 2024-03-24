@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
 import Header from '../Header'
 import Footer from '../Footer'
-import {uploadFile,viewApplication} from '../Services/application'
+import { uploadFile,viewApplication} from '../Services/application'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './home.css'
@@ -233,8 +233,10 @@ function Index() {
     const handleSubmit = () => {    
         console.log("first",data)
         uploadFile(data).then((res) => {
+          
            if(res.status === 200){
             toast.success("Profile Updated Successfully")
+            console.log("123",res)
             navigate('/thankyou',{state:{data}})
         }
         else{
@@ -325,7 +327,7 @@ function Index() {
             {/* <Input value={readytolocate} type="text" onChange={(e)=>{setReadyToLocate(e.target.value)}} placeholder="Ready to Relocate"/> */}
             <Input3 style={{marginTop:"30px"}} className='df al'><div> Best Time to Reach : </div>   <Input style={{outline:"none",width:"100px"}}  value={bestTimeToReach} type="time" onChange={(e)=>{setBestTimeToReach(e.target.value)}}/></Input3>
             <Input2 value={comment} as="textarea" onChange={(e)=>{setComment(e.target.value)}} placeholder="Comments/Remarks"/>
-            <div className='df end'><Button onClick={()=>handleSubmit()}>Apply</Button></div>
+            <div className='df end'><Button onClick={handleSubmit}>Apply</Button></div>
           </FormContainer>
           <div className='seperetor b m'></div>
         </InnerContainer>
