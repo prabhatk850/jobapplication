@@ -97,6 +97,7 @@ function Preview() {
            <Div>
             <Heading>Preview</Heading>
                 <>
+                <Fields>Applied Position- {data.jobprofile}</Fields>
                 <Fields>Name- <h2> {data.name}</h2></Fields>
                 <Fields>Email-   <Div> {data.email}</Div></Fields>
                 <Fields>Phoneno.-   <Div> {data.phoneno}</Div></Fields>

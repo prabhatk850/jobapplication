@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { GoSignOut } from "react-icons/go";
+import { useNavigate } from 'react-router-dom';
 
 const Wrapper = styled.div`
 display: flex;
@@ -21,13 +22,15 @@ color: white;
 
 function Index() {
 
+  const navigate=useNavigate();
+
   const handleLogout = () => {
     localStorage.clear()
     window.location.href = '/Login'
   }
   return (
     <Wrapper>
-        <Div>
+        <Div onClick={()=>{navigate('/')}}>
           Job Application
         </Div>
         <Div>

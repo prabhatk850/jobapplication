@@ -67,7 +67,7 @@ function Admin() {
 
   const filterData = (searchTerm) => {
     const filteredData = data.filter((item) =>
-    item.skills.some(name => name.toLowerCase().includes(searchTerm.toLowerCase()))
+    item.skills.some(name => name.toLowerCase().includes(searchTerm.toLowerCase())) 
     );
     setFilteredData(filteredData);
   };
@@ -110,6 +110,7 @@ function Admin() {
                 coverletter: item.coverletter,
                 bestTimeToReach: item.bestTimeToReach,
                 additionalExperience: item.additionalExperience,
+                jobprofile: item.jobprofile,
 
               }})}>
 
@@ -118,6 +119,7 @@ function Admin() {
                   <Fields>Email - {item.email}</Fields>
                   <Fields>Phone No.- {item.phoneno}</Fields>
                   <Fields>Experience - {item.experience}</Fields>
+                  <Fields>Applied for - {item.jobprofile}</Fields>
                   <div className='df'>
                     <Fields>Skills - </Fields> 
                     <div className='skilldf'> {item.skills.map((skill,index)=>

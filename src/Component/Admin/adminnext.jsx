@@ -60,7 +60,7 @@ color: white;
 function AdminNext(){
 
     const {state} = useLocation();
-    const {name,email,phoneno,dob,skills,secondarySkills,city,readytolocate,experience,comment,degree,resume,states,coverletter,bestTimeToReach,additionalExperience} = state || {};
+    const {name,email,phoneno,dob,skills,jobprofile,secondarySkills,city,readytolocate,experience,comment,degree,resume,states,coverletter,bestTimeToReach,additionalExperience} = state || {};
 
 const [locate,setLocate]=useState("");
 const relocate=()=>{
@@ -79,8 +79,9 @@ useEffect(()=>{
 })
 
 
-function handleCopy (){
-    navigator.clipboard.writeText(email)
+
+function handleCopy (e){
+    navigator.clipboard.writeText(e)
     toast.success("Copied!")
   }
 
@@ -89,9 +90,11 @@ function handleCopy (){
         <Wrapper>
             <ToastContainer/>
             <h1>User Details</h1>
-            <Fields style={{fontSize:"25px"}} className='df m'>Name- <h2> {name}</h2></Fields>
-            <div style={{fontSize:"20px"}} className='df'>Email-<h4> {email}</h4><Buttoncontainer><FaRegCopy style={{height:"20px",width:"20px"}} onClick={handleCopy}/></Buttoncontainer></div>
-            <Div>Phone no. - {phoneno}</Div>
+            <Fields style={{fontSize:"20px"}} className='df '>Applied for- <h4> {jobprofile}</h4></Fields>
+            <Fields style={{fontSize:"25px"}} className='df '>Name- <h2> {name}</h2></Fields>
+            <div style={{fontSize:"20px"}} className='df'>Email-<h4> {email}</h4><Buttoncontainer><FaRegCopy style={{height:"15px",width:"15px"}} onClick={()=>handleCopy(email)}/></Buttoncontainer></div>
+            <div style={{fontSize:"20px"}} className='df'>Phone no.-<h4> {phoneno}</h4><Buttoncontainer><FaRegCopy style={{height:"15px",width:"15px"}} onClick={()=>handleCopy(phoneno)}/></Buttoncontainer></div>
+            {/* <Div>Phone no. - {phoneno}</Div><Buttoncontainer><FaRegCopy style={{height:"20px",width:"20px"}} onClick={()=>handleCopy(phoneno)}/></Buttoncontainer> */}
             <Div>Date of Birth- {dob}</Div>
             <Div className='df'>
                     <Fields>Skills - </Fields> 
