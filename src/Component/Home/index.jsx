@@ -197,6 +197,8 @@ function Index() {
     const [coverletter, setCoverLetter] = useState([])
     const [bestTimeToReach, setBestTimeToReach] = useState('')
     const [jobprofile, setJobprofile] = useState('UI/UX Developer')
+    const [releventexperience, setReleventExperience] = useState('')
+    const [noticeperiod, setNoticePeriod] = useState('')
     // const [file, setFile] = useState(null)
 
     const options = [
@@ -269,7 +271,9 @@ function Index() {
         resume,
         coverletter,
         bestTimeToReach, 
-        jobprofile
+        jobprofile,
+        releventexperience,
+        noticeperiod
     }
 
     useEffect(() => {  
@@ -292,8 +296,6 @@ function Index() {
             setBestTimeToReach(res.data.bestTimeToReach)
             setJobprofile(res.data.jobprofile)
           
-            // setCss(isAdmin? setCss('none'):setCss('absolute'))
-
             if(res.data.isAdmin){
               setCss('absolute')
             }else{
@@ -358,15 +360,17 @@ function Index() {
               <Choice value="Java Developer">Java Developer</Choice>
               <Choice value="React Developer">React Developer</Choice>
               <Choice value="Node.js Developer">Node.js Developer</Choice>
+              <Choice value="Other">Other</Choice>
             </Select1>
             </div>
             <Input3>{name}</Input3>
             <Input3>{email}</Input3>
             <Input value={phoneno} type="text" onChange={(e)=>{setPhoneno(e.target.value)}} placeholder="Phone"/>
-            <Input value={dob} placeholder='D.O.B - dd-mm-yy' type="date" onChange={(e)=>{setDob(e.target.value)}} style={{color:"gray"}}/>
             <Input value={degree} type="text" onChange={(e)=>{setDegree(e.target.value)}} placeholder="Heighest Degree"/>
-            <Input value={experience} type="text" onChange={(e)=>{setExperience(e.target.value)}} placeholder="Experience in Years"/>
-            <Input value={additionalExperience} type="text" onChange={(e)=>{setAdditionalExperience(e.target.value)}} placeholder="Experience in specific field (e.g.- OTT Platform, Banking, etc.)"/>
+            <Input value={dob} type="date" onChange={(e)=>{setDob(e.target.value)}} placeholder="Date of Birth (dd/mm/yy)"/>
+            <Input value={experience} type="text" onChange={(e)=>{setExperience(e.target.value)}} placeholder="Total Experience in Years"/>
+            <Input value={releventexperience} type="text" onChange={(e)=>{setReleventExperience(e.target.value)}} placeholder="Relevent Experience in Years"/>
+            <Input value={additionalExperience} type="text" onChange={(e)=>{setAdditionalExperience(e.target.value)}} placeholder="Experience in specific fields (e.g.- Worked on OTT Platform, Banking, etc.)"/>
 
       <Select
       styles={{outline: "none" ,marginTop:"20px",marginBottom:"20px"}}
@@ -413,7 +417,17 @@ function Index() {
         
 
         
-
+          
+        <div style={{display:"flex",alignItems:"center"}}>Notice period :
+            <Select1 value={noticeperiod} onChange={(e)=>{setNoticePeriod(e.target.value)}}>
+              <Choice value="0-15 Days">0-15 Days</Choice>
+              <Choice value="15-30 Days">15-30 Days</Choice>
+              <Choice value="30-60 Days">30-60 Days</Choice>
+              <Choice value="60-90 Days">2-3 Months</Choice>
+              <Choice value="More than 90 Days">More Than 3 Months</Choice>
+              <Choice value="Other">Other</Choice>
+            </Select1>
+        </div>
   
 
             {/* <Input value={readytolocate} type="text" onChange={(e)=>{setReadyToLocate(e.target.value)}} placeholder="Ready to Relocate"/> */}
