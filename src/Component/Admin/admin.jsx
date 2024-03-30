@@ -39,7 +39,7 @@ const Fields = styled.div`
 border: 1px solid #1f1010;
 display: flex;
 justify-content: center;
-padding: 5px 5px;
+padding: 5px 0px;
 `;
 
 const Nodata = styled.div`
@@ -56,6 +56,7 @@ const Grid= styled.div`
 display: grid;
 grid-template-columns: repeat(1, minmax(50%, 1fr));
 border: 1px solid #1f1010;
+width: 100%;
 `;
 
 
@@ -98,13 +99,16 @@ function Admin() {
     <Header/>
     <Wrapper>
      <div className='df m' style={{justifyContent:"end",alignItems:"center"}}> <Input type='text' placeholder='Search' value={searchTerm} onChange={handleInputChange}></Input><Searchicon /></div>
-                  <div className='df' style={{border:"1px solid black"}}>
-                  <Fields style={{width:"200px",fontSize:"24px",fontWeight:"500"}}>Name</Fields>
-                  <Fields style={{width:"277px",fontSize:"24px",fontWeight:"500"}}>Email</Fields>
-                  <Fields style={{width:"139px",fontSize:"24px",fontWeight:"500"}}>Phone no.</Fields>
-                  <Fields style={{width:"120px",fontSize:"24px",fontWeight:"500"}}>Experience</Fields>
-                  <Fields style={{width:"185px",fontSize:"24px",fontWeight:"500"}}>Applied for</Fields>
-                  <Fields style={{fontSize:"24px",fontWeight:"500",width:"360px"}}>Skills</Fields>
+                  <div className='df' style={{border:"1px solid black",width:"100%"}}>
+                  <Fields style={{width:"201px"}}>Name</Fields>
+                  <Fields style={{width:"178px"}}>Notice period</Fields>
+                  <Fields style={{width:"140px"}}>Current Salary</Fields>
+                  <Fields style={{width:"140px"}}>Relevent experience</Fields>
+                  <Fields style={{width:"121px"}}>Total Experience</Fields>
+                  <Fields style={{width:"186px"}}>Applied for</Fields>
+                  <Fields style={{width:"373px"}}>Skills</Fields>
+                  <Fields style={{width:"373px"}}>Additional Skills</Fields>
+                  <Fields style={{width:"70px"}}>View</Fields>
                   </div>          
 
      <Grid>
@@ -130,20 +134,28 @@ function Admin() {
                 bestTimeToReach: item.bestTimeToReach,
                 additionalExperience: item.additionalExperience,
                 jobprofile: item.jobprofile,
-
+                noticeperiod: item.noticeperiod,
+                releventexperience: item.releventexperience,
+                currentSalary: item.currentSalary,
+                expectedSalary: item.expectedSalary,
+              
               }})}>
 
 
                   <Fields style={{width:"216px"}}>{item.name}</Fields>
-                  <Fields style={{width:"300px"}}>{item.email}</Fields>
-                  <Fields style={{width:"150px"}}>{item.phoneno}</Fields>
+                  <Fields style={{width:"190px"}}>{item.noticeperiod}</Fields>
+                  <Fields style={{width:"150px"}}>{item.currentSalary}</Fields>
+                  <Fields style={{width:"150px"}}>{item.releventexperience}</Fields>
                   <Fields style={{width:"130px"}}>{item.experience}</Fields>
                   <Fields style={{width:"200px"}}>{item.jobprofile}</Fields>
                   
                     <div style={{width:"400px",overflowX:"auto",border:"1px solid black"}} className='skilldf'> {item.skills.map((skill,index)=>
                   (<Div1 key={index}>{skill},  </Div1>))}</div>
                  
+                    <div style={{width:"400px",overflowX:"auto",border:"1px solid black"}} className='skilldf'> {item.secondarySkills.map((secondarySkills,index)=>
+                  (<Div1 key={index}>{secondarySkills},  </Div1>))}</div>
                  
+                 <Fields style={{width:"75px"}}> View </Fields>
                   
               </Div>
           

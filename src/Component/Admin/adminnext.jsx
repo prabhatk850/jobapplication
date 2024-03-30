@@ -1,15 +1,18 @@
 import { ToastContainer,toast } from 'react-toastify';        
 import styled from 'styled-components';
-import {useLocation} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import { useEffect,useState } from 'react';
-import { FaRegCopy } from 'react-icons/fa';
+import { FaRegCopy,FaLongArrowAltLeft  } from 'react-icons/fa';
+
+
+
 
 const Wrapper = styled.div`
 padding: 10%;
 background-color: aliceblue;
 display: flex;
-flex-direction: column;
-color: #102465d9;
+
+color: #5e6680d9;
 gap: 20px;
 @media (max-width: 768px){
     padding: 5%;
@@ -17,11 +20,49 @@ gap: 20px;
 }
 `;
 
-const Fields = styled.div`
-display: flex;
-align-items: center;
+const Input = styled.div`
+margin: 10px 0;
+border: none;
+width: 96%;
+outline: 1px solid #ccc;
+border-radius: 5px;
+padding: 5px 10px;
+`;
+
+
+const Heading=styled.div`
+font-size: 20px;
+color: Blue;
+margin: 20px 0 0 0;
+font-weight: 200;
 
 `;
+
+
+const Button = styled.button`
+padding: 10px 20px;
+margin: 10px;
+border-radius: 10px;
+background-color: #1f1010;
+color: white;
+border: none;
+cursor: pointer;
+font-weight:200;
+font-size: 18px;
+`;
+const FormContainer = styled.div`
+justify-content: space-between;
+display: flex;
+gap: 100px;
+@media (max-width: 768px){
+  display: block;
+}
+`;
+
+const Flex = styled.div`
+width: 50%;
+`;
+
 
 const Div = styled.div`
 margin: 10px 0;
@@ -43,7 +84,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 cursor: pointer;
-margin: 0 0 0 10px;
+margin: 12px 0 0 10px;
 color: white;
 
 @media (max-width: 768px){
@@ -54,28 +95,43 @@ color: white;
 }
 `;
 
+const Hover = styled.div`
+
+&:hover{
+    cursor: pointer;
+}
+`;
+
 
 
 
 function AdminNext(){
 
-    const {state} = useLocation();
-    const {name,email,phoneno,dob,skills,jobprofile,secondarySkills,city,readytolocate,experience,comment,degree,resume,states,coverletter,bestTimeToReach,additionalExperience} = state || {};
+    const navigate = useNavigate();
 
-const [locate,setLocate]=useState("");
-const relocate=()=>{
-    if(readytolocate===true){
-        setLocate("Yes")
-    }
-    else{
-        setLocate("No")
-    }
-}
+    const {state} = useLocation();
+    const {name,email,phoneno,expectedSalary,noticenegotiable,releventexperience,noticeperiod,currentSalary,skills,jobprofile,secondarySkills,city,readytolocate,experience,comment,degree,resume,states,coverletter,bestTimeToReach,additionalExperience} = state || {};
+
+
+
+const [iflocate,setIflocate]=useState(false)
+const [negotiation,setNegotiation]=useState(false)
+
 
 
 useEffect(()=>{
     window.scrollTo(0,0);
-    relocate()
+    if(readytolocate===true){
+        setIflocate("Yes")
+    }
+    else{
+        setIflocate("No")
+    }  
+    if(noticenegotiable===true){
+        setNegotiation("Yes")
+    }else{
+        setNegotiation("No")
+    }
 })
 
 
@@ -87,42 +143,96 @@ function handleCopy (e){
 
 
     return(
+        
         <Wrapper>
             <ToastContainer/>
-            <h1>User Details</h1>
-            <Fields style={{fontSize:"20px"}} className='df '>Applied for- <h4> {jobprofile}</h4></Fields>
-            <Fields style={{fontSize:"25px"}} className='df '>Name- <h2> {name}</h2></Fields>
-            <div style={{fontSize:"20px"}} className='df'>Email-<h4> {email}</h4><Buttoncontainer><FaRegCopy style={{height:"15px",width:"15px"}} onClick={()=>handleCopy(email)}/></Buttoncontainer></div>
-            <div style={{fontSize:"20px"}} className='df'>Phone no.-<h4> {phoneno}</h4><Buttoncontainer><FaRegCopy style={{height:"15px",width:"15px"}} onClick={()=>handleCopy(phoneno)}/></Buttoncontainer></div>
-            {/* <Div>Phone no. - {phoneno}</Div><Buttoncontainer><FaRegCopy style={{height:"20px",width:"20px"}} onClick={()=>handleCopy(phoneno)}/></Buttoncontainer> */}
-            <Div>Date of Birth- {dob}</Div>
-            <Div className='df'>
-                    <Fields>Skills - </Fields> 
-                    <div className='skilldf'> 
-                   {skills.map((skills,index)=>( <Fields key={index}> {skills},</Fields>))}
-                 </div>
-            </Div>
+            
+           <Div>
+            
+           <div style={{display:"flex",margin:"50px 0 10px 0",alignItems:"center",fontSize:"25px",color:"black",justifyContent:"start"}}><FaLongArrowAltLeft /><div onClick={(e)=>{navigate('/admin')}}>Back</div></div>
 
+            <h1 style={{color:"blue"}}>Preview</h1>
+                
+<FormContainer>
+
+<Flex>
+  
+
+<Input >Position Applied- {jobprofile}</Input >
+ 
+
+<Input style={{margin:"50px 0 0 0"}}>{name}</Input >
+<div className='df end'><Input>{email}</Input ><Buttoncontainer><FaRegCopy style={{height:"15px",width:"15px"}} onClick={()=>handleCopy(email)}/></Buttoncontainer></div>
+<Input>{phoneno}</Input>
+
+<Heading>Qualifications</Heading>
+
+<Input>{degree}</Input> 
+<Input>Total Experience- {experience}</Input> 
+<Input>Relevent Experience- {releventexperience}</Input> 
+<Input>Domain- {additionalExperience}</Input> 
+<Heading>Location</Heading>
+
+<Input>City- {city}</Input> 
+<Input>State- {states}</Input> 
+
+<Input>Ready to Locate- {iflocate}</Input> 
+
+</Flex>
+
+<Flex>
+
+<Heading style={{margin:"60px 0 0 0"}}>Skills</Heading>
+<Input className="df aic">Primary Skills-  
+                    <div className='skilldf'> {skills.map((skill,index)=>
+                  (<Div key={index}> {skill}, </Div>))}</div>
+                    </Input> 
+                  
                  
-            <Div className='df'>
-                    <Fields>Secondary Skills - </Fields> 
-                    <div className='skilldf'> 
-                    {secondarySkills.map((secondarySkills,index)=>
-                  (<Fields key={index}>{secondarySkills},</Fields>))}</div>
-            </Div>      
-           
-            <Div>State- {states}</Div>
-            <Div>City- {city}</Div>
-            <Div>Ready to Locate- {locate}</Div>
-            <Div>Experience- {experience}</Div>
-            <Div>Degree- {degree}</Div>
-            <Div className='df' onClick={() => window.open(resume, '_blank')}>Resume- <div style={{color:"blue"}}>{"View"}</div> </Div>
-            <Div className='df' onClick={() => window.open(coverletter, '_blank')}>Coverletter- <div style={{color:"blue"}}>{"View"}</div></Div>
-            <Div>Best time to reach- {bestTimeToReach}</Div>
-            <Div>Additional Experience- {additionalExperience}</Div>
-            <Div>Comment- {comment}</Div>
-            
-            
+                 
+                    <Input className="df aic">Secondary Skills-   
+                    <div className='skilldf'> {secondarySkills.map((secondarySkills,index)=>
+                  (<Div key={index}> {secondarySkills}, </Div>))}</div>
+                  </Input>
+                    
+
+
+
+{/* <Input>Coverletter- {coverletter}</Input>
+<Input>Resume- {resume}</Input> */}
+
+            <Div className='df' onClick={() => window.open(coverletter, '_blank')}>Coverletter- <Hover style={{color:"blue"}}>{"View"}</Hover></Div>
+            <Div className='df' onClick={() => window.open(resume, '_blank')}>Resume- <Hover style={{color:"blue"}}>{"View"}</Hover> </Div>
+        
+
+
+<Heading style={{margin:"40px 0 0 0"}}>Additional Details</Heading>
+
+<Input>Expected CTC- {expectedSalary}</Input>
+<Input>Current CTC- {currentSalary}</Input>
+
+<div style={{gap:"15px"}} className="df">
+<Input> Notice- {noticeperiod}</Input> 
+
+<Input>Negotiable- {negotiation}</Input>
+</div>
+<Input>Time to reach out- {bestTimeToReach}</Input>
+
+
+<Input> {comment}</Input>
+
+
+<div className='end' style={{display:"flex",marginTop:"50px"}}><Button onClick={()=>navigate('/admin')}>Back</Button>
+              
+<Button>Contact</Button>
+</div>
+
+
+</Flex>
+</FormContainer>
+
+                
+           </Div>
         </Wrapper>
     )
 }

@@ -309,6 +309,7 @@ function Index() {
         noticeperiod,
         expectedSalary,
         currentSalary,
+        noticenegotiable
     }
 
     useEffect(() => {  
@@ -334,6 +335,7 @@ function Index() {
             setNoticePeriod(res.data.noticeperiod)
             setExpectedSalary(res.data.expectedSalary)
             setCurrentSalary(res.data.currentSalary)
+            setNoticeNegotiable(res.data.noticenegotiable)
           
             if(res.data.isAdmin){
               setCss('absolute')
@@ -472,7 +474,7 @@ function Index() {
            
            
             
-        <Heading style={{margin:"40px 0 0 0"}}>Salary Details</Heading>
+        <Heading style={{margin:"40px 0 0 0"}}>Additional Details</Heading>
 
         <Input value={expectedSalary} type="text" onChange={(e)=>{setExpectedSalary(e.target.value)}} placeholder="Expected CTC per Annum"/>
         <Input value={currentSalary} type="text" onChange={(e)=>{setCurrentSalary(e.target.value)}} placeholder="Current CTC per Annum"/>

@@ -5,7 +5,7 @@ import { useLocation, useNavigate} from "react-router-dom";
 
 
 const Wrapper = styled.div`
-padding: 10%;
+padding: 4%;
 display: flex;
 align-items: center;
 justify-content: center;
@@ -16,17 +16,24 @@ background-color: aliceblue;
 }
 `;
 
-const Heading = styled.div`
-color: #1e3890;
-font-size: 40px;
-margin-bottom: 50px;
-font-weight: 600;
-
-@media (max-width: 768px){
-    font-size: 30px;
-
-}
+const Input = styled.div`
+margin: 10px 0;
+border: none;
+width: 96%;
+outline: 1px solid #ccc;
+border-radius: 5px;
+padding: 5px 10px;
 `;
+
+
+const Heading=styled.div`
+font-size: 20px;
+color: Blue;
+margin: 20px 0 0 0;
+font-weight: 200;
+
+`;
+
 
 const Button = styled.button`
 padding: 10px 20px;
@@ -45,17 +52,17 @@ font-size: 20px;
 color: gray;
 `;
 
-const Fields = styled.div`
-margin: 15px 0;
-font-size: 20px;
-color: #1E3790;
+const FormContainer = styled.div`
+justify-content: space-between;
 display: flex;
-gap: 10px;
-align-items: center;
+gap: 100px;
 @media (max-width: 768px){
-    font-size: 17px;
-margin: 40px 0;
+  display: block;
 }
+`;
+
+const Flex=styled.div`
+width: 50%;
 `;
 
 
@@ -64,6 +71,7 @@ margin: 40px 0;
 function Preview() {
     
     const [iflocate,setIflocate]=React.useState(false)
+    const [negotiation,setNegotiation]=React.useState(false)
     // const [application, setApplication] = React.useState([]);
 
     const navigate = useNavigate();
@@ -81,6 +89,11 @@ function Preview() {
         else{
             setIflocate("No")
         }  
+        if(data.noticenegotiable===true){
+            setNegotiation("Yes")
+        }else{
+            setNegotiation("No")
+        }
      
     },[]);
 
@@ -95,45 +108,80 @@ function Preview() {
     return (
         <Wrapper>
            <Div>
-            <Heading>Preview</Heading>
-                <>
-                <Fields>Applied Position- {data.jobprofile}</Fields>
-                <Fields>Name- <h2> {data.name}</h2></Fields>
-                <Fields>Email-   <Div> {data.email}</Div></Fields>
-                <Fields>Phoneno.-   <Div> {data.phoneno}</Div></Fields>
-                <Fields> Date of Birth-  <Div> {data.dob}</Div></Fields>
-                    
-                    
-                    <Fields>Skills- 
+            <h1 style={{color:"blue"}}>Preview</h1>
+                
+<FormContainer>
+
+<Flex>
+  
+
+<Input >Position Applied- {data.jobprofile}</Input >
+ 
+
+<Input style={{margin:"50px 0 0 0"}}>{data.name}</Input >
+<Input>{data.email}</Input >
+<Input>{data.phoneno}</Input>
+
+<Heading>Qualifications</Heading>
+
+<Input>{data.degree}</Input> 
+<Input>Total Experience- {data.experience}</Input> 
+<Input>Relevent Experience- {data.releventexperience}</Input> 
+<Input>Domain- {data.additionalExperience}</Input> 
+<Heading>Location</Heading>
+
+<Input>City- {data.city}</Input> 
+<Input>State- {data.state}</Input> 
+
+<Input>Ready to Locate- {iflocate}</Input> 
+
+</Flex>
+
+<Flex>
+
+<Heading style={{margin:"60px 0 0 0"}}>Skills</Heading>
+<Input className="df">Primary Skills- 
                     <div className='skilldf'> {data.skills.map((skill,index)=>
                   (<Div key={index}>{skill}, </Div>))}</div>
-                    </Fields> 
+                    </Input> 
                   
                  
                  
-                    <Fields>Secondary Skills-  
+                    <Input className="df">Secondary Skills-  
                     <div className='skilldf'> {data.secondarySkills.map((secondarySkills,index)=>
                   (<Div key={index}> {secondarySkills}, </Div>))}</div>
-                  </Fields>
+                  </Input>
                     
-                    
-             <Fields>City- <Div>{data.city}</Div></Fields>
-             <Fields>State- <Div>{data.state}</Div></Fields>
-             <Fields>Ready to Locate- <Div>{iflocate}</Div></Fields>        
-             <Fields>Experience- <Div>{data.experience}</Div></Fields>       
-             <Fields>Comment- <Div>{data.comment}</Div></Fields>       
-             <Fields>Degree- <Div>{data.degree}</Div></Fields>       
-             <Fields>Resume- <Div>{data.resume.name}</Div></Fields>       
-             <Fields>coverletter- <Div>{data.coverletter.name}</Div></Fields>       
-             <Fields>BestTimeToReach- <Div>{data.bestTimeToReach}</Div></Fields>       
-             <Fields>Additional Experience- <Div>{data.additionalExperience}</Div></Fields>       
-                    
-                    
-                </>
 
-                <div style={{display:"flex",justifyContent:"center",marginTop:"110px"}}><Button onClick={()=>navigate('/')}>Edit</Button></div>
+
+
+<Input>Coverletter- {data.coverletter.name}</Input>
+<Input>Resume- {data.resume.name}</Input>
+
+
+<Heading style={{margin:"40px 0 0 0"}}>Additional Details</Heading>
+
+<Input>Expected CTC- {data.expectedSalary}</Input>
+<Input>Current CTC- {data.currentSalary}</Input>
+
+<div style={{gap:"15px"}} className="df">
+<Input> Notice- {data.noticeperiod}</Input> 
+
+<Input>Negotiable- {negotiation}</Input>
+</div>
+<Input>Time to reach out- {data.bestTimeToReach}</Input>
+
+
+<Input> {data.comment}</Input>
+<div className="df end">
+<div style={{display:"flex",justifyContent:"center",marginTop:"50px"}}><Button onClick={()=>navigate('/')}>Edit</Button></div>
                 
-                <div style={{display:"flex",justifyContent:"center"}}><Button onClick={handlelogout}>Log out</Button></div>
+                <div style={{display:"flex",marginTop:"50px",justifyContent:"center"}}><Button onClick={handlelogout}>Log out</Button></div>
+</div>
+</Flex>
+</FormContainer>
+
+                
            </Div>
         </Wrapper>
     )
