@@ -12,32 +12,32 @@ import Select from 'react-select';
 
 
 
-
+const Background = styled.div`
+background-image: url(https://nispand-prod.oss-ap-south-1.aliyuncs.com/Images/movingWave.gif);
+background-size: cover;
+position: relative;
+`;
 
 
 const Wrapper = styled.div`
 align-items: center;
-display: flex;
-height: 100%;
-width: 100%;
-background-image: url(https://nispand-prod.oss-ap-south-1.aliyuncs.com/Images/movingWave.gif);
-background-size: cover;
 justify-content: center;
-position: relative;
+display: flex;
+width: 100%;
+
 
 `;
 
 const InnerContainer = styled.div`
 border-radius: 10px;
 margin: 50px;
-width: 35%;
 z-index: 2;
 
 box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
 background: #fff;
 padding: 0 50px 50px;
-height:80vh;
-overflow-y: scroll;
+
+
 @media(max-width: 768px){
     width: 90%;
 }
@@ -72,7 +72,7 @@ top:10;
 left: 10;
 z-index: 2;
 background-color: white;
-width: 38%;
+width: 90%;
 margin: 0 auto 10px -10px;
 padding-top: 20px;
 height: 40px;
@@ -83,14 +83,19 @@ height: 40px;
 
 
 const FormContainer = styled.div`
-flex-direction: column;
+justify-content: space-between;
 display: flex;
+gap: 150px;
+@media (max-width: 768px){
+  display: block;
+}
 `;
 
 const Input = styled.input`
 margin: 10px 0;
 height: 40px;
 border: none;
+width: 96%;
 outline: 1px solid #ccc;
 border-radius: 5px;
 padding: 5px 10px;
@@ -103,8 +108,9 @@ outline: 1px solid #ccc;
 border-radius: 5px;
 display:flex;
 padding: 5px 10px;
+width: 96%;
 align-items: center;
-font-weight: 800;
+font-weight: 600;
 `;
 const Input4 = styled.div`
 margin: 10px 0;
@@ -116,6 +122,7 @@ display:flex;
 padding: 5px 10px;
 align-items: center;
 font-weight: 200;
+width: 96%;
 `;
 
 const Input2 = styled.input`
@@ -126,6 +133,7 @@ outline: 1px solid #ccc;
 border-radius: 5px;
 padding: 5px 10px;
 resize: none;
+width: 96%;
 padding: 20px 10px;
 `;
 
@@ -148,6 +156,7 @@ border-radius: 5px;
 margin-top: 20px;
 font-size: 16px;
 color: white;
+
 `;
 
 // const Div = styled.div`
@@ -171,6 +180,27 @@ const Choice=styled.option`
 color: gray;
 `;
 
+const Flex=styled.div`
+width: 50%;
+`;
+
+const Heading=styled.div`
+font-size: 20px;
+color: Blue;
+margin: 20px 0 0 0;
+font-weight: 200;
+
+`;
+const Heading2=styled.div`
+font-size: 20px;
+color: Blue;
+margin: 70px 0 0 0;
+font-weight: 200;
+
+@media (max-width: 768px){
+  
+}
+`;
 
 
 
@@ -199,6 +229,9 @@ function Index() {
     const [jobprofile, setJobprofile] = useState('UI/UX Developer')
     const [releventexperience, setReleventExperience] = useState('')
     const [noticeperiod, setNoticePeriod] = useState('')
+    const [expectedSalary, setExpectedSalary] = useState('')
+    const [currentSalary, setCurrentSalary] = useState('')
+    const [noticenegotiable, setNoticeNegotiable] = useState(false)
     // const [file, setFile] = useState(null)
 
     const options = [
@@ -273,7 +306,9 @@ function Index() {
         bestTimeToReach, 
         jobprofile,
         releventexperience,
-        noticeperiod
+        noticeperiod,
+        expectedSalary,
+        currentSalary,
     }
 
     useEffect(() => {  
@@ -295,6 +330,10 @@ function Index() {
             setCoverLetter(res.data.coverletter)
             setBestTimeToReach(res.data.bestTimeToReach)
             setJobprofile(res.data.jobprofile)
+            setReleventExperience(res.data.releventexperience)
+            setNoticePeriod(res.data.noticeperiod)
+            setExpectedSalary(res.data.expectedSalary)
+            setCurrentSalary(res.data.currentSalary)
           
             if(res.data.isAdmin){
               setCss('absolute')
@@ -343,16 +382,22 @@ function Index() {
   return (
   <>
       <Header/>
-    <Wrapper>
+      <Background>
       <ToastContainer/>
+      <div style={{justifyContent:"center",display:"flex"}}><AdminButton className={css} onClick={()=>{navigate('/admin')}}>Admin</AdminButton></div>
+    <Wrapper>
         <InnerContainer>
           <HeaderContainer>
            <HeaderTextcontainer>
              <HeaderText>Update Basic Details</HeaderText>
            </HeaderTextcontainer>
-            {/* <div onClick={()=>navigate('/login')} >❌</div> */}
           </HeaderContainer>
+
+
           <FormContainer>
+
+            <Flex>
+              
             <div style={{marginTop:"70px",display:"flex",alignItems:"center"}}>Position Applied :
             <Select1 value={jobprofile} onChange={(e)=>{setJobprofile(e.target.value)}}>
               <Choice value="UI/UX Developer">UI/UX Developer</Choice>
@@ -366,12 +411,33 @@ function Index() {
             <Input3>{name}</Input3>
             <Input3>{email}</Input3>
             <Input value={phoneno} type="text" onChange={(e)=>{setPhoneno(e.target.value)}} placeholder="Phone"/>
+            
+            <Heading>Qualifications</Heading>
+            
             <Input value={degree} type="text" onChange={(e)=>{setDegree(e.target.value)}} placeholder="Heighest Degree"/>
-            <Input value={dob} type="date" onChange={(e)=>{setDob(e.target.value)}} placeholder="Date of Birth (dd/mm/yy)"/>
+            {/* <Input value={dob} type="date" onChange={(e)=>{setDob(e.target.value)}} placeholder="Date of Birth (dd/mm/yy)"/> */}
             <Input value={experience} type="text" onChange={(e)=>{setExperience(e.target.value)}} placeholder="Total Experience in Years"/>
             <Input value={releventexperience} type="text" onChange={(e)=>{setReleventExperience(e.target.value)}} placeholder="Relevent Experience in Years"/>
-            <Input value={additionalExperience} type="text" onChange={(e)=>{setAdditionalExperience(e.target.value)}} placeholder="Experience in specific fields (e.g.- Worked on OTT Platform, Banking, etc.)"/>
+            <Input value={additionalExperience} type="text" onChange={(e)=>{setAdditionalExperience(e.target.value)}} placeholder="Domain (e.g.- Worked on OTT Platform, Banking, etc.)"/>
 
+            <Heading>Location</Heading>
+
+            <Input  value={city} type="text" onChange={(e)=>{setCity(e.target.value)}} placeholder="City"/>
+            <Input value={state} type="text" onChange={(e)=>{setState(e.target.value)}} placeholder="State"/>
+
+            <div className='df'>
+            <div className='m df al'>Ready to Relocate</div>
+            <label className="switch">
+                <input  type="checkbox" onChange={(e)=>{setReadyToLocate(!readytolocate)}} value={readytolocate}/>
+                <span className="slider round"></span>
+            </label>
+        </div>
+
+</Flex>
+
+<Flex>
+
+    <Heading2>Skills</Heading2>
       <Select
       styles={{outline: "none" ,marginTop:"20px",marginBottom:"20px"}}
       isMulti
@@ -387,7 +453,7 @@ function Index() {
 
 
     <Select
-      styles={{outline: "none" ,marginTop:"20px",marginBottom:"20px"}}
+      styles={{outline: "none",width:"100%" ,marginTop:"20px",marginBottom:"20px"}}
       isMulti
       name="secondarySkills"
       options={options}
@@ -395,29 +461,25 @@ function Index() {
       onChange={handleSecondaryChange}
       defaultheight={100}
       value={secondaryOptions}
-      placeholder="Enter Skills"
+      placeholder="Additional Skills"
     />
 
 
 
 
-          <Input4 style={{marginTop:"30px"}} className='df al'><div> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setResume(handleFileChange(e))}} placeholder="Resume" /></Input4>
-          <Input4 className='df al'><div> cover letter : </div>   <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input4>
-            <Input  value={city} type="text" onChange={(e)=>{setCity(e.target.value)}} placeholder="City"/>
-            <Input value={state} type="text" onChange={(e)=>{setState(e.target.value)}} placeholder="State"/>
+          <Input4 style={{marginTop:"20px"}} className='df al'><div style={{width:"120px"}}> cover letter : </div>   <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input4>
+          <Input4  style={{marginTop:"20px"}} className='df al'><div style={{width:"120px"}}> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setResume(handleFileChange(e))}} placeholder="Resume" /></Input4>
+           
            
             
-        <div className='df'>
-            <div className='m df al'>Ready to Relocate</div>
-            <label className="switch">
-                <input  type="checkbox" onChange={(e)=>{setReadyToLocate(!readytolocate)}} value={readytolocate}/>
-                <span className="slider round"></span>
-            </label>
-        </div>
+        <Heading style={{margin:"40px 0 0 0"}}>Salary Details</Heading>
+
+        <Input value={expectedSalary} type="text" onChange={(e)=>{setExpectedSalary(e.target.value)}} placeholder="Expected CTC per Annum"/>
+        <Input value={currentSalary} type="text" onChange={(e)=>{setCurrentSalary(e.target.value)}} placeholder="Current CTC per Annum"/>
         
 
         
-          
+          <div  className='df '>
         <div style={{display:"flex",alignItems:"center"}}>Notice period :
             <Select1 value={noticeperiod} onChange={(e)=>{setNoticePeriod(e.target.value)}}>
               <Choice value="0-15 Days">0-15 Days</Choice>
@@ -428,18 +490,28 @@ function Index() {
               <Choice value="Other">Other</Choice>
             </Select1>
         </div>
+
+        <div style={{marginTop:"10px",marginLeft:"30px"}}>Negotiable</div>
+        <input value={noticenegotiable} style={{height:"20px",width:"20px",margin:"10px"}} onChange={(e)=>{setNoticeNegotiable(e.target.value)}} type='checkbox'></input>
+        </div>
   
 
             {/* <Input value={readytolocate} type="text" onChange={(e)=>{setReadyToLocate(e.target.value)}} placeholder="Ready to Relocate"/> */}
-            <Input4 style={{marginTop:"30px"}} className='df al'><div> Best Time to Reach : </div>   <Input style={{outline:"none",width:"100px"}}  value={bestTimeToReach} type="time" onChange={(e)=>{setBestTimeToReach(e.target.value)}}/></Input4>
+            
+            
+            <Input value={bestTimeToReach} type="text" onChange={(e)=>{setBestTimeToReach(e.target.value)}} placeholder="Best Time to Reach"/>
+            
+            
             <Input2 value={comment} as="textarea" onChange={(e)=>{setComment(e.target.value)}} placeholder="Comments/Remarks"/>
-            <div className='df end'><Button onClick={handleSubmit}>Apply</Button></div>
+            <div style={{marginTop:"50px"}} className='df end'><Button onClick={handleSubmit}>Apply</Button></div>
+    </Flex>
           </FormContainer>
           <div className='seperetor b m'></div>
         </InnerContainer>
 
-        <AdminButton className={css} onClick={()=>{navigate('/admin')}}>Admin</AdminButton>
-    </Wrapper>
+        </Wrapper>
+        
+    </Background>
     <Footer/>
   </>
   )
