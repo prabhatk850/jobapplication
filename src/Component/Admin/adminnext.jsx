@@ -24,6 +24,7 @@ const Input = styled.div`
 margin: 10px 0;
 border: none;
 width: 96%;
+min-height: 25px;
 outline: 1px solid #ccc;
 border-radius: 5px;
 padding: 5px 10px;
@@ -61,6 +62,9 @@ gap: 100px;
 
 const Flex = styled.div`
 width: 50%;
+@media(max-width: 768px){
+    width: 100%;
+}
 `;
 
 
@@ -224,7 +228,7 @@ function handleCopy (e){
 
 <div className='end' style={{display:"flex",marginTop:"50px"}}><Button onClick={()=>navigate('/admin')}>Back</Button>
               
-<Button>Contact</Button>
+<Button onClick={()=>{window.open(`mailto:${email}?subject=application job`,'_blank')}}>Contact</Button>
 </div>
 
 

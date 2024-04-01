@@ -4,6 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { signUp } from "../Services/application";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+// import CircularProgress from '@material-ui/core/CircularProgress';
+import { Oval } from "react-loader-spinner";
+
 
 const Wrapper = styled.div`
   display: flex;
@@ -239,8 +242,10 @@ function Singup() {
     };
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
  
-  const handlesignUpData= ()=>{
+  const handlesignUpData= async()=>{
     if(name==="" || email === "" || password==="" || cnfPassword===""){
       setError("Enter all fields")
     }
@@ -251,12 +256,15 @@ function Singup() {
       const data = { name,
       email,
       password
-      }
+    }
+    setIsLoading(true);
    
     
       signUp(data).then((result)=>{
+
         console.log("submit",result.status)
         if(result.status === 200){
+          setIsLoading(false);
           console.log("sub",result.data)
           toast.success("Signup Successfull")
           setName("")
@@ -311,6 +319,26 @@ function Singup() {
           <SubmitButton 
           onClick={()=>{handlesignUpData()}}
           >Submit</SubmitButton>
+          {isLoading ?
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            backgroundColor:"white",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        >
+          <Oval
+            visible={true}
+            height="90"
+            width="90"
+            color="#5947bd"
+            ariaLabel="oval-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div> : ""}
           <Error>{error}</Error>
           
         </SingUpSection>
@@ -337,6 +365,25 @@ function Singup() {
           <SubmitButton 
           onClick={()=>{handlesignUpData()}}
           >Sing Up</SubmitButton>
+          {isLoading ?
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        >
+          <Oval
+            visible={true}
+            height="130"
+            width="130"
+            color="#4fa94d"
+            ariaLabel="oval-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div> : ""}
           <Error>{error}</Error>
           <Head>
           <AlreadyLogin>Have An Account ?</AlreadyLogin>

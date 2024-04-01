@@ -42,6 +42,13 @@ justify-content: center;
 padding: 5px 0px;
 `;
 
+const Hover = styled.div`
+&:hover{
+    color: #0162e1;
+    cursor: pointer;
+}
+`;
+
 const Nodata = styled.div`
 margin: 30px;
 font-size: 30px;
@@ -115,31 +122,7 @@ function Admin() {
       {filteredData.length===0 && <Nodata>No Data Found</Nodata>}
       {filteredData.map((item,index)=>(
           
-              <Div key={index.id} onClick={()=>navigate("/userdetail",{state:{
-
-                name:item.name,
-                email:item.email,
-                phoneno:item.phoneno,
-                dob:item.dob,
-                skills:item.skills,
-                secondarySkills:item.secondarySkills,
-                states:item.state,
-                city:item.city,
-                readytolocate:item.readytolocate,
-                experience:item.experience,
-                comment:item.comment,
-                degree:item.degree,
-                resume: item.resume,
-                coverletter: item.coverletter,
-                bestTimeToReach: item.bestTimeToReach,
-                additionalExperience: item.additionalExperience,
-                jobprofile: item.jobprofile,
-                noticeperiod: item.noticeperiod,
-                releventexperience: item.releventexperience,
-                currentSalary: item.currentSalary,
-                expectedSalary: item.expectedSalary,
-              
-              }})}>
+              <Div key={index.id} >
 
 
                   <Fields style={{width:"216px"}}>{item.name}</Fields>
@@ -155,7 +138,31 @@ function Admin() {
                     <div style={{width:"400px",overflowX:"auto",border:"1px solid black"}} className='skilldf'> {item.secondarySkills.map((secondarySkills,index)=>
                   (<Div1 key={index}>{secondarySkills},  </Div1>))}</div>
                  
-                 <Fields style={{width:"75px"}}> View </Fields>
+                 <Fields style={{width:"75px"}}> <Hover onClick={()=>navigate("/userdetail",{state:{
+
+name:item.name,
+email:item.email,
+phoneno:item.phoneno,
+dob:item.dob,
+skills:item.skills,
+secondarySkills:item.secondarySkills,
+states:item.state,
+city:item.city,
+readytolocate:item.readytolocate,
+experience:item.experience,
+comment:item.comment,
+degree:item.degree,
+resume: item.resume,
+coverletter: item.coverletter,
+bestTimeToReach: item.bestTimeToReach,
+additionalExperience: item.additionalExperience,
+jobprofile: item.jobprofile,
+noticeperiod: item.noticeperiod,
+releventexperience: item.releventexperience,
+currentSalary: item.currentSalary,
+expectedSalary: item.expectedSalary,
+
+}})}>View</Hover> </Fields>
                   
               </Div>
           

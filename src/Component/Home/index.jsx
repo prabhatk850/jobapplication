@@ -40,6 +40,7 @@ padding: 0 50px 50px;
 
 @media(max-width: 768px){
     width: 90%;
+    padding: 0 20px 20px;
 }
 `;
 
@@ -112,6 +113,16 @@ width: 96%;
 align-items: center;
 font-weight: 600;
 `;
+
+const Div = styled.div`
+display: flex;
+gap: 30px;
+
+@media (max-width:768px){
+    display: block;
+}
+`;
+
 const Input4 = styled.div`
 margin: 10px 0;
 height: 40px;
@@ -182,6 +193,10 @@ color: gray;
 
 const Flex=styled.div`
 width: 50%;
+
+@media (max-width: 768px){
+    width: 100%;
+}
 `;
 
 const Heading=styled.div`
@@ -198,7 +213,7 @@ margin: 70px 0 0 0;
 font-weight: 200;
 
 @media (max-width: 768px){
-  
+  margin: 20px 0 0 0;
 }
 `;
 
@@ -400,7 +415,7 @@ function Index() {
 
             <Flex>
               
-            <div style={{marginTop:"70px",display:"flex",alignItems:"center"}}>Position Applied :
+            <div style={{marginTop:"70px",display:"flex",alignItems:"center",width:"max-content"}}>Position Applied :
             <Select1 value={jobprofile} onChange={(e)=>{setJobprofile(e.target.value)}}>
               <Choice value="UI/UX Developer">UI/UX Developer</Choice>
               <Choice value="Full stack developer">Full stack developer</Choice>
@@ -430,7 +445,7 @@ function Index() {
             <div className='df'>
             <div className='m df al'>Ready to Relocate</div>
             <label className="switch">
-                <input  type="checkbox" onChange={(e)=>{setReadyToLocate(!readytolocate)}} value={readytolocate}/>
+                <input  type="checkbox" defaultValue={false} onChange={(e)=>{setReadyToLocate(!readytolocate)}} value={readytolocate}/>
                 <span className="slider round"></span>
             </label>
         </div>
@@ -481,7 +496,7 @@ function Index() {
         
 
         
-          <div  className='df '>
+          <Div>
         <div style={{display:"flex",alignItems:"center"}}>Notice period :
             <Select1 value={noticeperiod} onChange={(e)=>{setNoticePeriod(e.target.value)}}>
               <Choice value="0-15 Days">0-15 Days</Choice>
@@ -492,10 +507,11 @@ function Index() {
               <Choice value="Other">Other</Choice>
             </Select1>
         </div>
-
-        <div style={{marginTop:"10px",marginLeft:"30px"}}>Negotiable</div>
-        <input value={noticenegotiable} style={{height:"20px",width:"20px",margin:"10px"}} onChange={(e)=>{setNoticeNegotiable(e.target.value)}} type='checkbox'></input>
+        <div className='df'>
+        <div style={{marginTop:"10px"}}>Negotiable :</div>
+        <input value={noticenegotiable} defaultValue={noticenegotiable} style={{height:"20px",width:"20px",margin:"10px"}}  onChange={(e)=>{setNoticeNegotiable(!noticenegotiable)}} type='checkbox'></input>
         </div>
+        </Div>
   
 
             {/* <Input value={readytolocate} type="text" onChange={(e)=>{setReadyToLocate(e.target.value)}} placeholder="Ready to Relocate"/> */}

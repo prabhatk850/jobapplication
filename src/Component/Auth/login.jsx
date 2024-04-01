@@ -6,6 +6,7 @@ import { login } from '../Services/application';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { doLoggedIn } from ".";
+import { Oval } from "react-loader-spinner";
 
 
 const Wrapper = styled.div`
@@ -204,22 +205,23 @@ function Login() {
   const navigate = useNavigate()
   const [email,setEmail]= useState("")
   const [password,setPassword]= useState("")
-
+  const [isLoading, setIsLoading] = useState(false);
   
   const clearForm = () => {
     setEmail("");
     setPassword("");
   }
-
-
+  
   const handleLogin = () => {
+    setIsLoading(true);
     const data = {email,password};
        login(data).then((res)=>{
-       console.log("res11",res);
-       if(res.status === 200){
+         console.log("res11",res);
+         if(res.status === 200){
        localStorage.setItem("token",res.data.token);
        localStorage.setItem("isAdmin",res.data.isAdmin);
        navigate("/");
+        setIsLoading(false);
        toast.success("Login Successfull");
      // clear the states 
      clearForm()
@@ -307,6 +309,25 @@ function Login() {
           <SubmitButton 
           onClick={(e)=>{handleLogin()}}
           >LogIn</SubmitButton>
+          {isLoading ?
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        >
+          <Oval
+            visible={true}
+            height="90"
+            width="90"
+            color="#83f7ff"
+            ariaLabel="oval-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div> : ""}
         </SingUpSection>
       </Section2>
       </Desktop>
@@ -330,6 +351,25 @@ function Login() {
           <SubmitButton
           onClick={handleLogin}
           >Sign In</SubmitButton>
+          {isLoading ?
+        <div
+          style={{
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%,-50%)",
+          }}
+        >
+          <Oval
+            visible={true}
+            height="130"
+            width="130"
+            color="#4fa94d"
+            ariaLabel="oval-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div> : ""}
         </SingUpSection>
       </Mobile>
     </Wrapper>

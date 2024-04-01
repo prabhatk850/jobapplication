@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-   
     "aws-sdk": "^2.1581.0",
     "axios": "^1.6.7",
     "dotenv": "^16.4.5",
@@ -19,6 +18,8 @@
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
     "react-icons": "^4.12.0",
+    "react-loader-spinner": "^6.1.6",
+    "react-loading-icons": "^1.1.0",
     "react-router-dom": "^6.21.1",
     "react-select": "^5.8.0",
     "react-slideshow-image": "^4.3.1",

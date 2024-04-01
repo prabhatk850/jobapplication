@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import styled from "styled-components";
 import { doLoggedOut } from "../Services/application";
 import { useLocation, useNavigate} from "react-router-dom";
@@ -63,6 +63,10 @@ gap: 100px;
 
 const Flex=styled.div`
 width: 50%;
+
+@media (max-width: 768px){
+    width: 100%;
+}
 `;
 
 
@@ -70,8 +74,8 @@ width: 50%;
 
 function Preview() {
     
-    const [iflocate,setIflocate]=React.useState(false)
-    const [negotiation,setNegotiation]=React.useState(false)
+    const [iflocate,setIflocate]=useState("")
+    const [negotiation,setNegotiation]=useState("")
     // const [application, setApplication] = React.useState([]);
 
     const navigate = useNavigate();
