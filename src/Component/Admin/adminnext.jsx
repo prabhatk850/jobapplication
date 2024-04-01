@@ -8,7 +8,7 @@ import { FaRegCopy,FaLongArrowAltLeft  } from 'react-icons/fa';
 
 
 const Wrapper = styled.div`
-padding: 10%;
+padding: 0 10% ;
 background-color: aliceblue;
 display: flex;
 
@@ -153,9 +153,9 @@ function handleCopy (e){
             
            <Div>
             
-           <div style={{display:"flex",margin:"50px 0 10px 0",alignItems:"center",fontSize:"25px",color:"black",justifyContent:"start"}}><FaLongArrowAltLeft /><div onClick={(e)=>{navigate('/admin')}}>Back</div></div>
+           <div style={{display:"flex",margin:"10px 0 10px 0",alignItems:"center",fontSize:"25px",color:"black",justifyContent:"start"}}><FaLongArrowAltLeft /><div onClick={(e)=>{navigate('/admin')}}>Back</div></div>
 
-            <h1 style={{color:"blue"}}>Preview</h1>
+            <h1 style={{color:"blue"}}>Candidate Details</h1>
                 
 <FormContainer>
 
@@ -226,7 +226,7 @@ function handleCopy (e){
 <Input> {comment}</Input>
 
 
-<div className='end' style={{display:"flex",marginTop:"50px"}}><Button onClick={()=>navigate('/admin')}>Back</Button>
+<div className='end' style={{display:"flex",marginTop:"30px"}}><Button onClick={()=>navigate('/admin')}>Back</Button>
               
 <Button onClick={()=>{window.open(`mailto:${email}?subject=application job`,'_blank')}}>Contact</Button>
 </div>
