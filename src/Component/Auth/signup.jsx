@@ -5,7 +5,7 @@ import { signUp } from "../Services/application";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import CircularProgress from '@material-ui/core/CircularProgress';
-import { Oval } from "react-loader-spinner";
+import { MutatingDots } from "react-loader-spinner";
 
 
 const Wrapper = styled.div`
@@ -273,7 +273,8 @@ function Singup() {
           setError("")
           navigate("/login")      
         }
-        else toast.error(result.data)        
+        else {toast.error(result.data) 
+        setIsLoading(false);}       
       })
          
    }}
@@ -329,15 +330,17 @@ function Singup() {
             transform: "translate(-50%,-50%)",
           }}
         >
-          <Oval
-            visible={true}
-            height="90"
-            width="90"
-            color="#5947bd"
-            ariaLabel="oval-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
+          <MutatingDots
+  visible={true}
+  height="100"
+  width="100"
+  color="blue"
+  secondaryColor="blue"
+  radius="15.5"
+  ariaLabel="mutating-dots-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  />
         </div> : ""}
           <Error>{error}</Error>
           
@@ -374,15 +377,17 @@ function Singup() {
             transform: "translate(-50%,-50%)",
           }}
         >
-          <Oval
-            visible={true}
-            height="130"
-            width="130"
-            color="#4fa94d"
-            ariaLabel="oval-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
-          />
+          <MutatingDots
+  visible={true}
+  height="100"
+  width="100"
+  color="blue"
+  secondaryColor="blue"
+  radius="12.5"
+  ariaLabel="mutating-dots-loading"
+  wrapperStyle={{}}
+  wrapperClass=""
+  />
         </div> : ""}
           <Error>{error}</Error>
           <Head>
