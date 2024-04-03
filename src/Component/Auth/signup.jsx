@@ -6,15 +6,26 @@ import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import CircularProgress from '@material-ui/core/CircularProgress';
 import { MutatingDots } from "react-loader-spinner";
+import Header from "../Header";
+import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
+import { InputText } from "primereact/inputtext";
+import EmailIcon from '@mui/icons-material/Email';
+import PasswordIcon from '@mui/icons-material/Password';
 
 
 const Wrapper = styled.div`
-  display: flex;
+ display: flex;
   width: 100%;
+  height: 88vh;
+  box-shadow: 0 4px 7px 0 rgba(0,0,0,0.2);
+  background-image: linear-gradient(to top, cyan, #2C79DF); ;
+  @media (max-width: 768px){
+    height: 100%;
+  }
 `;
 const Section1 = styled.div`
   background-color: rgb(44, 122, 223);
-  height: 100vh;
+  height: 88vh;
   width: 500px;
   @media(max-width: 1024px){
     width: 300px;
@@ -39,13 +50,30 @@ const Section2 = styled.div`
 
 const AlreadyLogin = styled.span`
   margin: 0 10px 0 0;
+  font-size: 18px;
+  color: black;
+  /* width: inherit; */
+   @media (max-width:767px){
+   font-size: 15px;
+    cursor: pointer;
+    margin: 25px 0px 0px;
+    color: black;
+  }
 `;
 const AlreadyLoginSingin = styled.span`
-  font-weight: bold;
+  font-weight: 800;
+  color: cyan;
+  font-size: 18px;
   cursor: pointer;
+  @media (max-width:767px){
+   font-size: 15px;
+    cursor: pointer;
+    margin: 25px 0px 20px 0;
+    color: black;
+  }
 `;
 const SingUpSection = styled.div`
-  padding: 10% 30%;
+  padding: 30px 15%;
 `;
 const Title = styled.div`
   font-size: 49px;
@@ -57,108 +85,80 @@ const Title = styled.div`
   white-space: pre-line;
   opacity: 1;
   visibility: visible;
-  color: rgb(39, 43, 48);
+  color: cyan;
   font-family: "Work Sans";
    @media (max-width: 768px){
    text-align: center;
    font-size: 35px;
    color: #000000;
-   margin-top: 100px;
+   margin-top: 50px;
   }
 `;
 const Fileds = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: center;
    @media (max-width: 768px){
-    margin-top:40px ;
-    padding: 10% 20%;
+    margin-top:10px ;
+    padding: 10% 10%;
   }
 `;
 
-const Email = styled.input`
+const Email = styled(InputText)`
   border: 0px;
   background: transparent;
-  padding: 0px 8px;
-  margin: 0px;
+  padding: 8px 0 0 0;
+  margin-left: 30px;
   outline: none;
+  border-bottom: 1px dashed rgb(192, 192, 192); 
   appearance: none;
   opacity: 1;
   color: rgb(82, 83, 84);
   font-family: "Work Sans";
   font-size: 15px;
   letter-spacing: 0px;
-  padding: 14px;
-  width: 80%;  
-  color: black;
+ 
+  width: 80%;
   @media (max-width:767px){
-    color: black;
+    color: black !important;
   }
 `;
 const SingUpInputStyle = styled.div`
-  height: 45px;
-  margin: 5px 0;
+  height: 70px;
+  margin: 25px 0;
   overflow: hidden;
   opacity: 1;
+  width: 330px;
+  border-radius: 10px;
+  padding: 15px 0 0 30px;
   outline: none;
-  background-color: rgb(250, 250, 250);
-  border-radius: 11px;
-  border: 1px solid rgb(192, 192, 192);
-   @media (max-width: 768px){
-     background-color: rgb(250, 250, 250);
-  }
-`;
-const Password = styled.input`
-  border: 0px;
-  background: transparent;
-  padding: 0px 8px;
-  margin: 0px;
-  outline: none;
-  appearance: none;
-  opacity: 1;
-  color: rgb(82, 83, 84);
-  font-family: "Work Sans";
-  font-size: 15px;
-  letter-spacing: 0px;
-  padding: 14px;
-  width: 80%;
-  color: black;
+  background-color:cyan;
+  /* border-bottom: 1px solid rgb(192, 192, 192); */
   @media (max-width:767px){
-    color: black;
-  }
-`;
-const RePassword = styled.input`
-  border: 0px;
-  background: transparent;
-  padding: 0px 8px;
-  margin: 0px;
-  outline: none;
-  appearance: none;
-  opacity: 1;
-  color: rgb(82, 83, 84);
-  font-family: "Work Sans";
-  font-size: 15px;
-  letter-spacing: 0px;
-  padding: 14px;
-  width: 80%;
-  color: black;
-  @media (max-width:767px){
-    color: black;
+     background-color:cyan;
+    width: 90%;
+    margin: 10px 0;
   }
 `;
 
-const TileDesc = styled.div``;
+
+const TileDesc = styled.div`
+  font-size: 20px;
+  color: cyan;
+  font-weight: 500;
+  margin-bottom: 35px;
+`;
 const SubmitButton = styled.button`
   height: 65px;
   background: rgb(68, 163, 255);
   border-radius: 5px;
   width: 100%;
-  margin: 10px 0 0 0;
+  margin: 40px 0 0 0;
   border: none;
   color: white;
   cursor: pointer;
    @media (max-width: 767px){
-     margin: 90px 0 0 0;
-  border-radius: 30px;
+     margin: 40px 0 0 0;
   }
 `;
 
@@ -200,6 +200,15 @@ const Error=styled.div`
 color:red;
 text-align: center;
 `;
+
+const Text1 = styled.div`
+width: 100%;
+margin-left: 10px;
+font-size: 20px;
+color: gray;
+font-weight: 500;
+`;
+
 const Desktop = styled.div`
 display: flex;
 width: 100%;
@@ -210,8 +219,10 @@ width: 100%;
 `;
 const Mobile = styled.div`
 width: 100%;
+height: 100%;
 @media (min-width: 768px){
   display: none;
+
 }
 `;
 const Text = styled.div`
@@ -281,10 +292,11 @@ function Singup() {
 
 
   return (
+    <>
+    <ToastContainer />
+      <Header/>
     <Wrapper> 
       <Desktop>
-
-      <ToastContainer />
       <Section1>
         <HeadingFeature>Features</HeadingFeature>
         <Features>Easy</Features>
@@ -303,19 +315,31 @@ function Singup() {
           <TileDesc>Signup with your Email</TileDesc>
           <Fileds>
            
-          <SingUpInputStyle>
-              <Email value={name} onChange={(e)=>(setName(e.target.value))}  placeholder="Name"></Email>
+          
+<div className="df jcsp">
+  <div>
+            <SingUpInputStyle>
+              <div className="df"><PersonRoundedIcon/><Text1>Name</Text1></div>
+            <Email value={name} onChange={(e)=>(setName(e.target.value))} />
+                 </SingUpInputStyle>
+
+            <SingUpInputStyle>
+            <div className="df"><EmailIcon/><Text1>Email</Text1></div>
+              <Email value={email} onChange={(e)=>(setEmail(e.target.value))}></Email>
+            </SingUpInputStyle>
+  </div>
+  <div>
+            <SingUpInputStyle>
+            <div className="df"><PasswordIcon/><Text1>Password</Text1></div>
+              <Email type="password" value={password} onChange={(e)=>(setPassword(e.target.value))}></Email>
             </SingUpInputStyle>
 
             <SingUpInputStyle>
-              <Email value={email} onChange={(e)=>(setEmail(e.target.value))} placeholder="Email"></Email>
+            <div className="df"><PasswordIcon/><Text1>Confirm Password</Text1></div>
+              <Email type="password" value={cnfPassword} onChange={(e)=>(setcnfPassword(e.target.value))}  ></Email>
             </SingUpInputStyle>
-            <SingUpInputStyle>
-              <Password type="password" value={password} onChange={(e)=>(setPassword(e.target.value))} placeholder="Password"></Password>
-            </SingUpInputStyle>
-            <SingUpInputStyle>
-              <RePassword type="password" value={cnfPassword} onChange={(e)=>(setcnfPassword(e.target.value))} placeholder="Repeat Password"></RePassword>
-            </SingUpInputStyle>
+  </div>
+</div>
           </Fileds>
           <SubmitButton 
           onClick={()=>{handlesignUpData()}}
@@ -325,7 +349,6 @@ function Singup() {
           style={{
             position: "fixed",
             top: "50%",
-            backgroundColor:"white",
             left: "50%",
             transform: "translate(-50%,-50%)",
           }}
@@ -334,8 +357,8 @@ function Singup() {
   visible={true}
   height="100"
   width="100"
-  color="blue"
-  secondaryColor="blue"
+  color="#2C79DF"
+  secondaryColor="#2C79DF"
   radius="15.5"
   ariaLabel="mutating-dots-loading"
   wrapperStyle={{}}
@@ -352,22 +375,34 @@ function Singup() {
       <Text>Please fill in the form to Continue</Text>
       <Fileds>
            
-          <SingUpInputStyle>
-              <Email value={name} onChange={(e)=>(setName(e.target.value))}  placeholder="Name"></Email>
+      <SingUpInputStyle>
+              <div className="df"><PersonRoundedIcon/><Text1>Name</Text1></div>
+            <Email value={name} onChange={(e)=>(setName(e.target.value))} />
+                 </SingUpInputStyle>
+
+            <SingUpInputStyle>
+            <div className="df"><EmailIcon/><Text1>Email</Text1></div>
+              <Email value={email} onChange={(e)=>(setEmail(e.target.value))}></Email>
+            </SingUpInputStyle>
+  
+            <SingUpInputStyle>
+            <div className="df"><PasswordIcon/><Text1>Password</Text1></div>
+              <Email type="password" value={password} onChange={(e)=>(setPassword(e.target.value))}></Email>
             </SingUpInputStyle>
 
             <SingUpInputStyle>
-              <Email value={email} onChange={(e)=>(setEmail(e.target.value))} placeholder="Email"></Email>
-            </SingUpInputStyle>
-            <SingUpInputStyle>
-              <Password type="password" value={password} onChange={(e)=>(setPassword(e.target.value))} placeholder="Password"></Password>
-            </SingUpInputStyle>
-            <SingUpInputStyle>
-              <RePassword type="password" value={cnfPassword} onChange={(e)=>(setcnfPassword(e.target.value))} placeholder="Repeat Password"></RePassword>
+            <div className="df"><PasswordIcon/><Text1>Confirm Password</Text1></div>
+              <Email type="password" value={cnfPassword} onChange={(e)=>(setcnfPassword(e.target.value))}  ></Email>
             </SingUpInputStyle>
           <SubmitButton 
           onClick={()=>{handlesignUpData()}}
           >Sing Up</SubmitButton>
+
+<div style={{gap:"10px"}} className="df">
+          <AlreadyLogin>Have An Account?</AlreadyLogin>
+          <AlreadyLoginSingin onClick={()=>{navigate("/login")}}>Sign in</AlreadyLoginSingin>
+          </div>   
+
           {isLoading ?
         <div
           style={{
@@ -381,23 +416,21 @@ function Singup() {
   visible={true}
   height="100"
   width="100"
-  color="blue"
-  secondaryColor="blue"
-  radius="12.5"
+  color="#2C79DF"
+  secondaryColor="#2C79DF"
+  radius="8.5"
   ariaLabel="mutating-dots-loading"
   wrapperStyle={{}}
   wrapperClass=""
   />
         </div> : ""}
           <Error>{error}</Error>
-          <Head>
-          <AlreadyLogin>Have An Account ?</AlreadyLogin>
-          <AlreadyLoginSingin onClick={()=>{navigate("/login")}}>Sign in</AlreadyLoginSingin>
-        </Head>
+          
           </Fileds>
       
       </Mobile>
     </Wrapper>
+    </>
   );
 }
 

@@ -13,7 +13,7 @@ import Select from 'react-select';
 
 
 const Background = styled.div`
-background-image: url(https://nispand-prod.oss-ap-south-1.aliyuncs.com/Images/movingWave.gif);
+background-image: linear-gradient(to bottom, cyan, #0A599B);
 background-size: cover;
 position: relative;
 `;

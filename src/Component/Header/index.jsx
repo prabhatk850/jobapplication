@@ -18,6 +18,8 @@ padding: 40px 50px;
 const Div = styled.div`
 font-size: 25px;
 color: white;
+cursor: pointer;
+font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 `;
 
 function Index() {

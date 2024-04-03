@@ -7,15 +7,27 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import { doLoggedIn } from ".";
 import { MutatingDots } from "react-loader-spinner";
+import Header from "../Header";
+import { InputText } from 'primereact/inputtext';
+
+import EmailIcon from '@mui/icons-material/Email';
+import PasswordIcon from '@mui/icons-material/Password';
+        
 
 
 const Wrapper = styled.div`
   display: flex;
   width: 100%;
+  height: 88vh;
+  box-shadow: 0 4px 7px 0 rgba(0,0,0,0.2);
+  background-image: linear-gradient(to top, cyan, #2C79DF); ;
+  @media(max-width:768px){
+    height: 92vh;
+  }
 `;
 const Section1 = styled.div`
   background-color: rgb(44, 122, 223);
-  height: 100vh;
+  height: 88vh;
   width: 500px;
   @media(max-width:1034px){
     width: 300px;
@@ -33,21 +45,26 @@ const Section2 = styled.div`
 
 const AlreadyLogin = styled.span`
   margin: 0 10px 0 0;
+  font-size: 18px;
+  color: black;
+  /* width: inherit; */
    @media (max-width:767px){
     font-size: 12px;
     cursor: pointer;
-    margin: 8px 0px 0px;
+    margin: 25px 0px 0px;
   }
 `;
 const AlreadyLoginSingin = styled.span`
   font-weight: bold;
+  color: cyan;
+  font-size: 18px;
   cursor: pointer;
 `;
 const SingUpSection = styled.div`
   padding: 10% 30%;
   @media (max-width: 768px){
-    margin-top:40px ;
-    padding: 10% 20%;
+    /* margin-top:40px ; */
+    padding: 10% 10%;
   }
 `;
 const Title = styled.div`
@@ -56,16 +73,17 @@ const Title = styled.div`
   text-transform: none;
   text-align: left;
   letter-spacing: 0px;
+  color: cyan;
   line-height: 70px;
   white-space: pre-line;
   opacity: 1;
   visibility: visible;
-  color: rgb(0, 0, 0);
   font-family: "Work Sans";
   @media (max-width: 768px){
    text-align: center;
-   color: #000000;
-   margin-top: 100px;
+   color: cyan;
+   margin-top: 60px;
+   font-size: 35px;
   }
 `;
 const Fileds = styled.div`
@@ -73,67 +91,62 @@ const Fileds = styled.div`
   flex-direction: column;
 `;
 
-const Email = styled.input`
+const Email = styled(InputText)`
   border: 0px;
   background: transparent;
-  padding: 0px 8px;
-  margin: 0px;
+  padding: 8px 0 0 0;
+  margin-left: 30px;
   outline: none;
+  border-bottom: 1px dashed rgb(192, 192, 192); 
   appearance: none;
   opacity: 1;
   color: rgb(82, 83, 84);
   font-family: "Work Sans";
   font-size: 15px;
   letter-spacing: 0px;
-  padding: 14px;
+ 
   width: 80%;
   @media (max-width:767px){
     color: black !important;
   }
 `;
 const SingUpInputStyle = styled.div`
-  height: 45px;
+  height: 70px;
   margin: 5px 0;
   overflow: hidden;
   opacity: 1;
+  border-radius: 10px;
+  padding: 15px 0 0 30px;
   outline: none;
-  background-color: rgb(250, 250, 250);
-  border-radius: 11px;
-  border: 1px solid rgb(192, 192, 192);
+  background-color:cyan;
+  /* border-bottom: 1px solid rgb(192, 192, 192); */
   @media (max-width:767px){
-     background-color: rgb(250, 250, 250);
+     background-color:cyan;
+
     
   }
 `;
-const Password = styled.input`
-  border: 0px;
-  background: transparent;
-  padding: 0px 8px;
-  margin: 0px;
-  outline: none;
-  appearance: none;
-  opacity: 1;
-  color: rgb(82, 83, 84);
-  font-family: "Work Sans";
-  font-size: 15px;
-  letter-spacing: 0px;
-  padding: 14px;
-  width: 80%;
-  @media (max-width:767px){
-    color: black !important;
-  }
-`;
+// const Password1 = styled(Password)`
+// border: none;
+// outline: none;
+ 
+//   width: 80%;
+//   @media (max-width:767px){
+//     color: black !important;
+//   }
+// `;
 const SubmitButton = styled.button`
   height: 65px;
-  background: rgb(68, 163, 255);
+  background: #43A3FF;
   border-radius: 5px;
   width: 100%;
-  margin: 10px 0 0 0;
+  margin: 42px 0 0 0;
   border: none;
   color: white;
   cursor: pointer;
   @media (max-width: 767px){
-    margin: 90px 0;
+    margin: 35px 0;
+    width: 100%;
   }
 `;
 const Features = styled.div`
@@ -179,26 +192,54 @@ width: 100%;
 `;
 const Mobile = styled.div`
 width: 100%;
+height: 100%;
 @media (min-width: 768px){
   display: none;
 }
 `;
 const Text = styled.div`
 width: 100%;
-color: #000000;
+color: cyan;
 text-align: center;
 `;
+const Text1 = styled.div`
+width: 100%;
+margin-left: 10px;
+font-size: 20px;
+color: gray;
+font-weight: 500;
+`;
+
+const Heading = styled.div`
+font-size: 40px;
+font-weight: 200;
+text-transform: none;
+text-align: left;
+letter-spacing: 0px;
+line-height: 35px;
+white-space: pre-line;
+opacity: 1;
+visibility: visible;
+color: cyan;
+font-family: "Work Sans";
+margin: 0 0 35px 0;
+`;
+
 const ForgetPassword = styled.div`
-color: white;
+color: cyan;
 cursor: pointer;
 font-size: 12px;
-margin: 8px 0 0 0;
+margin: 25px 0 0 0;
 `;
-const LoginOptions = styled.div`
-display: flex;
-width: 100%;
-justify-content: space-between;
-`
+
+// const LoginOptions = styled.div`
+// display: flex;
+// width: 100%;
+// gap: 5px;
+// `;
+
+
+
 
 
 function Login() {
@@ -280,8 +321,11 @@ function Login() {
 //     })
 //   }
   return (
-    <Wrapper>
+
+    <div style={{height:"85vh"}}>
       <ToastContainer/>
+      <Header/>
+    <Wrapper>
       <Desktop>
       <Section1>
         <HeadingFeature>Features</HeadingFeature>
@@ -297,16 +341,17 @@ function Login() {
         </Head>
 
         <SingUpSection>
-          <Title>Login</Title>
-          <Fileds>
-           
+        <Heading>Welcome to LogIn</Heading>
+       <Fileds>
             <SingUpInputStyle>
-              <Email  value={email}  onChange={(e)=>{setEmail(e.target.value)}} placeholder="Email"></Email>
-            </SingUpInputStyle>
-            <SingUpInputStyle>
-              <Password type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder="Password"></Password>
-            </SingUpInputStyle>
-          </Fileds>
+              <div className="df"><EmailIcon/><Text1>Email</Text1></div>
+            <Email value={email}  onChange={(e)=>{setEmail(e.target.value)}} />
+                 </SingUpInputStyle>
+                 <SingUpInputStyle>
+              <div className="df"><PasswordIcon/><Text1>Password</Text1></div>
+              <Email  type="password"  value={password} onChange={(e)=>{setPassword(e.target.value)}} feedback={false}  />
+                 </SingUpInputStyle>
+              </Fileds>
           <SubmitButton 
           onClick={(e)=>{handleLogin()}}
           >LogIn</SubmitButton>
@@ -323,8 +368,8 @@ function Login() {
   visible={true}
   height="100"
   width="100"
-  color="blue"
-  secondaryColor="blue"
+  color="#2C79DF"
+  secondaryColor="#2C79DF"
   radius="15.5"
   ariaLabel="mutating-dots-loading"
   wrapperStyle={{}}
@@ -336,24 +381,27 @@ function Login() {
       </Desktop>
 
       <Mobile>
-      <Title>Welcome Back!</Title>
+        {/* <Header/> */}
+      <Title>Welcome to Login</Title>
       <Text>Please sign in to your account</Text>
       <SingUpSection>
-          <Fileds>
-           
+      <Fileds>
             <SingUpInputStyle>
-              <Email  value={email}  onChange={(e)=>{setEmail(e.target.value)}} placeholder="Email"></Email>
-            </SingUpInputStyle>
-            <SingUpInputStyle>
-              <Password type="password" value={password} onChange={(e)=>{setPassword(e.target.value)}} placeholder="Password"></Password>
-            </SingUpInputStyle>
-            <LoginOptions><AlreadyLogin onClick={()=>{navigate("/signup")}}>Don&apos;t have an Account ?</AlreadyLogin>
-            <ForgetPassword>Forgot Password ?</ForgetPassword></LoginOptions>
-            
-          </Fileds>
+              <div className="df"><EmailIcon/><Text1>Email</Text1></div>
+            <Email value={email}  onChange={(e)=>{setEmail(e.target.value)}} />
+                 </SingUpInputStyle>
+                 <SingUpInputStyle>
+              <div className="df"><PasswordIcon/><Text1>Password</Text1></div>
+              <Email  type="password"  value={password} onChange={(e)=>{setPassword(e.target.value)}} feedback={false}/>
+                 </SingUpInputStyle>
+              </Fileds>
+              
+            <ForgetPassword>Forgot Password ?</ForgetPassword>
           <SubmitButton
           onClick={handleLogin}
           >Sign In</SubmitButton>
+          <AlreadyLogin onClick={()=>{navigate("/signup")}}>Don&apos;t have an Account ?</AlreadyLogin>
+
           {isLoading ?
         <div
           style={{
@@ -367,8 +415,8 @@ function Login() {
   visible={true}
   height="100"
   width="100"
-  color="blue"
-  secondaryColor="blue"
+  color="#2C79DF"
+  secondaryColor="#2C79DF"
   radius="12.5"
   ariaLabel="mutating-dots-loading"
   wrapperStyle={{}}
@@ -378,6 +426,7 @@ function Login() {
         </SingUpSection>
       </Mobile>
     </Wrapper>
+    </div>
   );
 }
 
