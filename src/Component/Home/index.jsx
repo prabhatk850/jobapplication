@@ -7,8 +7,14 @@ import { uploadFile,viewApplication} from '../Services/application'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './home.css'
-import Select from 'react-select';
+// import Select from 'react-select';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+// import { Upload } from '@mui/icons-material';
+
 // import AWS from 'aws-sdk';
+
 
 
 
@@ -17,6 +23,7 @@ background-image: linear-gradient(to bottom, cyan, #0A599B);
 background-size: cover;
 position: relative;
 `;
+
 
 
 const Wrapper = styled.div`
@@ -34,12 +41,12 @@ margin: 50px;
 z-index: 2;
 
 box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-background: #fff;
+background: #99ffff;
 padding: 0 50px 50px;
 
 
 @media(max-width: 768px){
-    width: 90%;
+    width: 80%;
     padding: 0 20px 20px;
 }
 `;
@@ -57,7 +64,7 @@ position: absolute ;
 top:10;
 left: 10;
 z-index: 2;
-background-color: white;
+background-color: #99ffff;
 @media(max-width: 768px){
     font-size: 20px;
     width: 100%;
@@ -72,7 +79,7 @@ position: absolute ;
 top:10;
 left: 10;
 z-index: 2;
-background-color: white;
+background-color: #99ffff;
 width: 90%;
 margin: 0 auto 10px -10px;
 padding-top: 20px;
@@ -92,31 +99,15 @@ gap: 150px;
 }
 `;
 
-const Input = styled.input`
-margin: 10px 0;
-height: 40px;
-border: none;
-width: 96%;
-outline: 1px solid #ccc;
-border-radius: 5px;
-padding: 5px 10px;
-`;
-const Input3 = styled.div`
-margin: 10px 0;
-height: 40px;
-border: none;
-outline: 1px solid #ccc;
-border-radius: 5px;
-display:flex;
-padding: 5px 10px;
-width: 96%;
-align-items: center;
-font-weight: 600;
+const Input = styled(TextField)`
+width: 100%;
+/* margin: 20px 0; */
+
 `;
 
 const Div = styled.div`
 display: flex;
-gap: 30px;
+gap: 20px;
 
 @media (max-width:768px){
     display: block;
@@ -125,27 +116,36 @@ gap: 30px;
 
 const Input4 = styled.div`
 margin: 10px 0;
-height: 40px;
+height: 45px;
 border: none;
-outline: 1px solid #ccc;
-border-radius: 5px;
+color: #3E6666;
+outline: 1px solid #76C4C5;
+border-radius: 3px;
 display:flex;
 padding: 5px 10px;
 align-items: center;
 font-weight: 200;
 width: 96%;
+&:hover{
+  outline: 1px solid black;
+}
 `;
 
 const Input2 = styled.input`
-margin: 10px 0;
-height: 40px;
+margin: 20px 0;
+height: 100px;
+background: #98FFFF;
 border: none;
-outline: 1px solid #ccc;
-border-radius: 5px;
-padding: 5px 10px;
+color: #3E6666;
+outline: 1px solid #76C4C5;
+border-radius: 4px;
+padding: 10px;
 resize: none;
 width: 96%;
-padding: 20px 10px;
+font-size: 17px;
+&:hover{
+  outline: 1px solid black;
+}
 `;
 
 const Button = styled.button`
@@ -154,7 +154,7 @@ padding: 10px 20px;
 background-color: rgb(68, 163, 255);
 border: none;
 border-radius: 5px;
-margin-top: 20px;
+
 font-size: 16px;
 color: white;
 `;
@@ -175,21 +175,21 @@ color: white;
 // justify-content: end;
 // `;
 
-const Select1=styled.select`
-height:35px;
-font-size:20px;
-padding: 0 10px;
-color: gray;
-border: 1px solid #d9d9d9;
-margin-left: 10px;
-border-radius: 5px;
-line-height: 50px;
-outline: none;
-`;
+// const Select1=styled.select`
+// height:35px;
+// font-size:20px;
+// padding: 0 10px;
+// color: gray;
+// border: 1px solid #d9d9d9;
+// margin-left: 10px;
+// border-radius: 5px;
+// line-height: 50px;
+// outline: none;
+// `;
 
-const Choice=styled.option`
-color: gray;
-`;
+// const Choice=styled.option`
+// color: gray;
+// `;
 
 const Flex=styled.div`
 width: 50%;
@@ -199,17 +199,26 @@ width: 50%;
 }
 `;
 
+const Uploadbutton=styled.div`
+border: 1px solid #76C4C5;
+padding: 5px 10px;
+border-radius: 5px;
+background: #43A3FF;
+color: cyan;
+margin: 20px;
+`;
+
 const Heading=styled.div`
 font-size: 20px;
-color: Blue;
-margin: 20px 0 0 0;
+color: #43A3FF;
+margin: 20px 0 10px 0;
 font-weight: 200;
 
 `;
 const Heading2=styled.div`
 font-size: 20px;
-color: Blue;
-margin: 70px 0 0 0;
+color: #43A3FF;
+margin: 70px 0 20px 0;
 font-weight: 200;
 
 @media (max-width: 768px){
@@ -272,7 +281,7 @@ function Index() {
     //   });
     // };
 
-    const handleChange = (options) => {
+    const handleChange = (event,options) => {
       setSelectedOptions(options);
       console.log("selected", selectedOptions);
       setSkills(options)
@@ -281,7 +290,7 @@ function Index() {
     };
 
 
-    const handleSecondaryChange = (options) => {
+    const handleSecondaryChange = (e,options) => {
       setSecondaryOptions(options);
       console.log("sSelected", secondaryOptions);
       setSecondarySkills(options)
@@ -392,6 +401,23 @@ function Index() {
   }
 
 
+  const countries= [
+    {  label: 'UI Developer'},
+    {  label: 'UX Developer'},
+    {  label: 'Java Developer'},
+    {  label: 'React.js Developer'},
+    {  label: 'Node.js Developer'},
+    {  label: 'Others'},
+  ];
+
+  const noticePeriods = [
+    { label: '0-15 Days', value: '0-15 Days'},
+    { label: '15-30 Days', value: '15-30 Days'},
+    { label: '30-60 Days', value: '30-60 Days'},
+    { label: '2-3 Months', value: '60-90 Days' },
+    { label: 'More Than 3 Months', value: 'More than 90 Days'},
+    { label: 'Other', value: 'Other'},
+  ];
  
 
 
@@ -414,33 +440,45 @@ function Index() {
           <FormContainer>
 
             <Flex>
-              
-            <div style={{marginTop:"70px",display:"flex",alignItems:"center",width:"max-content"}}>Position Applied :
-            <Select1 value={jobprofile} onChange={(e)=>{setJobprofile(e.target.value)}}>
-              <Choice value="UI/UX Developer">UI/UX Developer</Choice>
-              <Choice value="Full stack developer">Full stack developer</Choice>
-              <Choice value="Java Developer">Java Developer</Choice>
-              <Choice value="React Developer">React Developer</Choice>
-              <Choice value="Node.js Developer">Node.js Developer</Choice>
-              <Choice value="Other">Other</Choice>
-            </Select1>
-            </div>
-            <Input3>{name}</Input3>
-            <Input3>{email}</Input3>
-            <Input value={phoneno} type="text" onChange={(e)=>{setPhoneno(e.target.value)}} placeholder="Phone"/>
-            
+
+            <Autocomplete
+      id="country-select-demo"
+      sx={{ width: "100%",marginTop:"70px",marginBottom:"20px" }}
+      options={countries}
+      autoHighlight
+      getOptionLabel={(option) => option.label}
+      renderOption={(props, option) => (
+        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+          {option.label}
+        </Box>
+      )}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Postion Applied"
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: 'new-password', // disable autocomplete and autofill
+          }}
+        />
+      )}
+    />
+          
+            <Input style={{margin:"10px 0"}} id='outlined-read-only-input' value={name} InputProps={{readOnly: true}} label="Name" >{name}</Input>
+            <Input style={{margin:"10px 0"}} id='outlined-read-only-input' value={email} InputProps={{readOnly: true}} label="Email" >{email}</Input>
+            <Input style={{margin:"10px 0"}} value={phoneno} id="outlined-basic" onChange={(e)=>{setPhoneno(e.target.value)}} label="Phone no." variant="outlined" />
             <Heading>Qualifications</Heading>
             
-            <Input value={degree} type="text" onChange={(e)=>{setDegree(e.target.value)}} placeholder="Heighest Degree"/>
+            <Input style={{margin:"10px 0"}} value={degree}  onChange={(e)=>{setDegree(e.target.value)}} label="Heighest Degree"/>
             {/* <Input value={dob} type="date" onChange={(e)=>{setDob(e.target.value)}} placeholder="Date of Birth (dd/mm/yy)"/> */}
-            <Input value={experience} type="text" onChange={(e)=>{setExperience(e.target.value)}} placeholder="Total Experience in Years"/>
-            <Input value={releventexperience} type="text" onChange={(e)=>{setReleventExperience(e.target.value)}} placeholder="Relevent Experience in Years"/>
-            <Input value={additionalExperience} type="text" onChange={(e)=>{setAdditionalExperience(e.target.value)}} placeholder="Domain (e.g.- Worked on OTT Platform, Banking, etc.)"/>
+            <Input style={{margin:"10px 0"}} value={experience} label="Total Experience" onChange={(e)=>{setExperience(e.target.value)}} />
+            <Input style={{margin:"10px 0"}} value={releventexperience} label="Relevent Experience" onChange={(e)=>{setReleventExperience(e.target.value)}} />
+            <Input style={{margin:"10px 0"}} value={additionalExperience} label="Domain" onChange={(e)=>{setAdditionalExperience(e.target.value)}} placeholder="Domain (e.g.- Worked on OTT Platform, Banking, etc.)"/>
 
             <Heading>Location</Heading>
 
-            <Input  value={city} type="text" onChange={(e)=>{setCity(e.target.value)}} placeholder="City"/>
-            <Input value={state} type="text" onChange={(e)=>{setState(e.target.value)}} placeholder="State"/>
+            <Input style={{margin:"10px 0"}} value={city} label="City" onChange={(e)=>{setCity(e.target.value)}}/>
+            <Input style={{margin:"10px 0"}} value={state} label="State" onChange={(e)=>{setState(e.target.value)}}/>
 
             <div className='df'>
             <div className='m df al'>Ready to Relocate</div>
@@ -455,21 +493,39 @@ function Index() {
 <Flex>
 
     <Heading2>Skills</Heading2>
-      <Select
-      styles={{outline: "none" ,marginTop:"20px",marginBottom:"20px"}}
-      isMulti
-      name="skills"
-      options={options}
-      className="basic-multi-select ac"
-      onChange={handleChange}
-      defaultheight={100}
-      value={selectedOptions}
-      placeholder="Enter Primary Skills"
+<Autocomplete
+style={{margin:"20px 0"}}
+  multiple
+  id="tags-outlined"
+  options={options}
+  onChange={handleChange}
+  value={selectedOptions}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      variant="outlined"
+      label="Enter Primary Skills"
     />
+  )}
+/>
 
+<Autocomplete
+style={{margin:"20px 0"}}
+  multiple
+  id="tags-outlined"
+  options={options}
+  onChange={handleSecondaryChange}
+  value={secondaryOptions}
+  renderInput={(params) => (
+    <TextField
+      {...params}
+      variant="outlined"
+      label="Enter Primary Skills"
+    />
+  )}
+/>
 
-
-    <Select
+    {/* <Select
       styles={{outline: "none",width:"100%" ,marginTop:"20px",marginBottom:"20px"}}
       isMulti
       name="secondarySkills"
@@ -479,25 +535,30 @@ function Index() {
       defaultheight={100}
       value={secondaryOptions}
       placeholder="Additional Skills"
-    />
+    /> */}
 
 
 
 
-          <Input4 style={{marginTop:"20px"}} className='df al'><div style={{width:"120px"}}> cover letter : </div>   <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input4>
-          <Input4  style={{marginTop:"20px"}} className='df al'><div style={{width:"120px"}}> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setResume(handleFileChange(e))}} placeholder="Resume" /></Input4>
+          <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Cover letter  </div> 
+          <Uploadbutton>Upload Cover Letter<input type="file" hidden onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
+          </Input4>
+            
+          <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Resume  </div> 
+          <Uploadbutton>Upload Resume<input type="file" hidden onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
+          </Input4>
+          
+     {/* <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input4> */}
+     {/* <Input4  style={{marginTop:"20px"}} className='df al'><div style={{width:"120px"}}> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setResume(handleFileChange(e))}} placeholder="Resume" /></Input4> */}
            
            
             
-        <Heading style={{margin:"40px 0 0 0"}}>Additional Details</Heading>
-
-        <Input value={expectedSalary} type="text" onChange={(e)=>{setExpectedSalary(e.target.value)}} placeholder="Expected CTC per Annum"/>
-        <Input value={currentSalary} type="text" onChange={(e)=>{setCurrentSalary(e.target.value)}} placeholder="Current CTC per Annum"/>
-        
-
+        <Heading style={{margin:"35px 0 0 0"}}>Additional Details</Heading>
+        <Input style={{margin:"20px 0"}} value={currentSalary} type="text" onChange={(e)=>{setCurrentSalary(e.target.value)}} label="Cureent Salary"/>
+        <Input value={expectedSalary} type="text" onChange={(e)=>{setExpectedSalary(e.target.value)}} label="Expected Salary"/>
         
           <Div>
-        <div style={{display:"flex",alignItems:"center"}}>Notice period :
+        {/* <Input4  style={{display:"flex",alignItems:"center",width:"65%",margin:"20px 0"}}>Notice period :
             <Select1 value={noticeperiod} onChange={(e)=>{setNoticePeriod(e.target.value)}}>
               <Choice value="0-15 Days">0-15 Days</Choice>
               <Choice value="15-30 Days">15-30 Days</Choice>
@@ -506,21 +567,44 @@ function Index() {
               <Choice value="More than 90 Days">More Than 3 Months</Choice>
               <Choice value="Other">Other</Choice>
             </Select1>
-        </div>
-        <div className='df'>
-        <div style={{marginTop:"10px"}}>Negotiable :</div>
+        </Input4> */}
+
+<Autocomplete
+      id="country-select-demo"
+      sx={{ width: "100%",marginTop:"20px",marginBottom:"20px" }}
+      options={noticePeriods}
+      onChange={(event, value) => setNoticePeriod(value)}
+      value={noticeperiod}
+      autoHighlight
+      getOptionLabel={(option) => option.label}
+      renderOption={(props, option) => (
+        <Box component="li" sx={{ '& > img': { mr: 2, flexShrink: 0 } }} {...props}>
+          {option.label}
+        </Box>
+      )}
+      renderInput={(params) => (
+        <TextField
+          {...params}
+          label="Notice Period" 
+          inputProps={{
+            ...params.inputProps,
+            autoComplete: 'new-password', // disable autocomplete and autofill
+          }}
+        />
+      )}
+    />
+
+        <Input4 style={{width:"35%",margin:"20px 0"}} className='df'>
+        <div style={{display:"flex",alignItems:"center"}}>Negotiable</div>
         <input value={noticenegotiable} defaultValue={noticenegotiable} style={{height:"20px",width:"20px",margin:"10px"}}  onChange={(e)=>{setNoticeNegotiable(!noticenegotiable)}} type='checkbox'></input>
-        </div>
+        </Input4>
         </Div>
   
-
-            {/* <Input value={readytolocate} type="text" onChange={(e)=>{setReadyToLocate(e.target.value)}} placeholder="Ready to Relocate"/> */}
+            
+            <Input value={bestTimeToReach} type="text" onChange={(e)=>{setBestTimeToReach(e.target.value)}} label="Best Time to Reach"/>
             
             
-            <Input value={bestTimeToReach} type="text" onChange={(e)=>{setBestTimeToReach(e.target.value)}} placeholder="Best Time to Reach"/>
-            
-            
-            <Input2 value={comment} as="textarea" onChange={(e)=>{setComment(e.target.value)}} placeholder="Comments/Remarks"/>
+            <Input2 style={{resize:"none",margin:"20px 0",height:"100px",padding:"10px",fontSize:"17px",background:""}} value={comment} as="textarea" onChange={(e)=>{setComment(e.target.value)}} placeholder="Comments/Remarks"/>
             <div style={{marginTop:"50px"}} className='df end'><Button onClick={handleSubmit}>Apply</Button></div>
     </Flex>
           </FormContainer>
