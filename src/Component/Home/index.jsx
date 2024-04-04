@@ -46,7 +46,8 @@ padding: 0 50px 50px;
 
 
 @media(max-width: 768px){
-    width: 80%;
+    width: 90%;
+    margin: 20px;
     padding: 0 20px 20px;
 }
 `;
@@ -126,6 +127,9 @@ padding: 5px 10px;
 align-items: center;
 font-weight: 200;
 width: 96%;
+@media (max-width: 768px){
+  width: 93.5%;
+}
 &:hover{
   outline: 1px solid black;
 }
@@ -143,10 +147,35 @@ padding: 10px;
 resize: none;
 width: 96%;
 font-size: 17px;
+@media (max-width: 768px){
+  width: 93.5%;
+}
 &:hover{
   outline: 1px solid black;
 }
 `;
+
+const Input3 = styled.div`
+margin: 20px 0;
+height: 45px;
+border: none;
+color: #3E6666;
+outline: 1px solid #76C4C5;
+border-radius: 3px;
+display:flex;
+padding: 5px 10px;
+align-items: center;
+font-weight: 200;
+width: 35%;
+
+@media (max-width: 768px){
+  width: 93.5%;
+}
+&:hover{
+  outline: 1px solid black;
+}
+`;
+
 
 const Button = styled.button`
 width: max-content;
@@ -206,6 +235,9 @@ border-radius: 5px;
 background: #43A3FF;
 color: cyan;
 margin: 20px;
+@media (max-width: 768px){
+  font-size: 12px;
+}
 `;
 
 const Heading=styled.div`
@@ -418,7 +450,7 @@ function Index() {
     { label: 'More Than 3 Months', value: 'More than 90 Days'},
     { label: 'Other', value: 'Other'},
   ];
- 
+
 
 
    
@@ -541,11 +573,11 @@ style={{margin:"20px 0"}}
 
 
           <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Cover letter  </div> 
-          <Uploadbutton>Upload Cover Letter<input type="file" hidden onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
+          <Uploadbutton  variant="contained" component="label">Upload Cover Letter<input type="file" hidden onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
           </Input4>
             
           <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Resume  </div> 
-          <Uploadbutton>Upload Resume<input type="file" hidden onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
+          <Uploadbutton  variant="contained" component="label">Upload Resume<input type="file" hidden onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
           </Input4>
           
      {/* <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input4> */}
@@ -594,10 +626,10 @@ style={{margin:"20px 0"}}
       )}
     />
 
-        <Input4 style={{width:"35%",margin:"20px 0"}} className='df'>
+        <Input3 className='df'>
         <div style={{display:"flex",alignItems:"center"}}>Negotiable</div>
         <input value={noticenegotiable} defaultValue={noticenegotiable} style={{height:"20px",width:"20px",margin:"10px"}}  onChange={(e)=>{setNoticeNegotiable(!noticenegotiable)}} type='checkbox'></input>
-        </Input4>
+        </Input3>
         </Div>
   
             
