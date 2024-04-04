@@ -576,7 +576,7 @@ style={{margin:"20px 0"}}
           </Input4>
             
           <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Resume  </div> 
-          <Uploadbutton  variant="contained" component="label">Upload Resume<input type="file" hidden onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
+          <Uploadbutton  variant="contained" component="label">Upload Resume<input type="file"  onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
           </Input4>
           
      {/* <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input4> */}
