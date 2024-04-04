@@ -502,7 +502,6 @@ function Index() {
             <Heading>Qualifications</Heading>
             
             <Input style={{margin:"10px 0"}} value={degree}  onChange={(e)=>{setDegree(e.target.value)}} label="Heighest Degree"/>
-            {/* <Input value={dob} type="date" onChange={(e)=>{setDob(e.target.value)}} placeholder="Date of Birth (dd/mm/yy)"/> */}
             <Input style={{margin:"10px 0"}} value={experience} label="Total Experience" onChange={(e)=>{setExperience(e.target.value)}} />
             <Input style={{margin:"10px 0"}} value={releventexperience} label="Relevent Experience" onChange={(e)=>{setReleventExperience(e.target.value)}} />
             <Input style={{margin:"10px 0"}} value={additionalExperience} label="Domain" onChange={(e)=>{setAdditionalExperience(e.target.value)}} placeholder="Domain (e.g.- Worked on OTT Platform, Banking, etc.)"/>
@@ -573,7 +572,7 @@ style={{margin:"20px 0"}}
 
 
           <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Cover letter  </div> 
-          <Uploadbutton  variant="contained" component="label">Upload Cover Letter<input type="file" hidden onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
+          <Uploadbutton  variant="contained" label='My Label' containerElement='label'  component="label">Upload Cover Letter<input type="file"  onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
           </Input4>
             
           <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Resume  </div> 
@@ -583,7 +582,7 @@ style={{margin:"20px 0"}}
      {/* <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input4> */}
      {/* <Input4  style={{marginTop:"20px"}} className='df al'><div style={{width:"120px"}}> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setResume(handleFileChange(e))}} placeholder="Resume" /></Input4> */}
            
-           
+            
             
         <Heading style={{margin:"35px 0 0 0"}}>Additional Details</Heading>
         <Input style={{margin:"20px 0"}} value={currentSalary} type="text" onChange={(e)=>{setCurrentSalary(e.target.value)}} label="Cureent Salary"/>
