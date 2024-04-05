@@ -2,16 +2,17 @@ import React ,{useState,useEffect} from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import { login } from '../Services/application';
-// import {loginService} from "../services/auth_service"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import { doLoggedIn } from ".";
 import { MutatingDots } from "react-loader-spinner";
 import Header from "../Header";
 import { InputText } from 'primereact/inputtext';
-
 import EmailIcon from '@mui/icons-material/Email';
-import PasswordIcon from '@mui/icons-material/Password';
+import LockIcon from '@mui/icons-material/Lock';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Divider } from 'primereact/divider';
+import { IconButton } from '@mui/material';
         
 
 
@@ -93,16 +94,16 @@ const Fileds = styled.div`
 
 const Email = styled(InputText)`
   border: 0px;
+  font-size: 20px;
   background: transparent;
-  padding: 8px 0 0 0;
+  padding: 14px 0 0 0;
   margin-left: 30px;
   outline: none;
-  border-bottom: 1px dashed rgb(192, 192, 192); 
+  border-bottom: 1px dashed black; 
   appearance: none;
   opacity: 1;
   color: rgb(82, 83, 84);
   font-family: "Work Sans";
-  font-size: 15px;
   letter-spacing: 0px;
  
   width: 80%;
@@ -116,7 +117,7 @@ const SingUpInputStyle = styled.div`
   overflow: hidden;
   opacity: 1;
   border-radius: 10px;
-  padding: 15px 0 0 30px;
+  padding: 10px 0 10px 30px;
   outline: none;
   background-color:cyan;
   /* border-bottom: 1px solid rgb(192, 192, 192); */
@@ -126,15 +127,7 @@ const SingUpInputStyle = styled.div`
     
   }
 `;
-// const Password1 = styled(Password)`
-// border: none;
-// outline: none;
- 
-//   width: 80%;
-//   @media (max-width:767px){
-//     color: black !important;
-//   }
-// `;
+
 const SubmitButton = styled.button`
   height: 65px;
   background: #43A3FF;
@@ -211,8 +204,8 @@ font-weight: 500;
 `;
 
 const Heading = styled.div`
-font-size: 40px;
-font-weight: 200;
+font-size: 49px;
+font-weight: 700;
 text-transform: none;
 text-align: left;
 letter-spacing: 0px;
@@ -232,11 +225,6 @@ font-size: 12px;
 margin: 25px 0 0 0;
 `;
 
-// const LoginOptions = styled.div`
-// display: flex;
-// width: 100%;
-// gap: 5px;
-// `;
 
 
 
@@ -261,13 +249,11 @@ function Login() {
          if(res.status === 200){
        localStorage.setItem("token",res.data.token);
        localStorage.setItem("isAdmin",res.data.isAdmin);
-       navigate("/");
+        navigate("/");
         setIsLoading(false);
        toast.success("Login Successfull");
-     // clear the states 
      clearForm()
-     // close the window
-    //  toggleLogin();
+
      }
      else{
        toast.error("Invalid Credentials");
@@ -292,34 +278,30 @@ function Login() {
     };
   });
 
-//   const clearState=()=>{
-//     setPassword("")
-//         setEmail("")
-//         navigate("/")
-//   }
-  
-//   function handleLogin() { 
-//     let data = {
-//       "email":email,
-//       "password":password
-//     }
-  
-//     console.log("log",data)
-//     loginService(data).then((result)=>{
-//       console.log("log",result)
-//       if(result.status === 200) {
-//         toast.success("Login Sucess")
-//         doLoggedIn(result.data,clearState)
-        
-        
-//       }
-//       else{toast.error(result.data)
-//         setPassword("")
-//         setEmail("")}
-//     }).catch((e)=>{
-//       console.log("login err",e)
-//     })
-//   }
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+
+  const header = <div className="font-bold mb-3">Pick a password</div>;
+    const footer = (
+        <>
+            <Divider />
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0 line-height-3">
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+            </ul>
+        </>
+    );
+
+
   return (
 
     <div style={{height:"85vh"}}>
@@ -347,21 +329,39 @@ function Login() {
               <div className="df"><EmailIcon/><Text1>Email</Text1></div>
             <Email value={email}  onChange={(e)=>{setEmail(e.target.value)}} />
                  </SingUpInputStyle>
+
                  <SingUpInputStyle>
-              <div className="df"><PasswordIcon/><Text1>Password</Text1></div>
-              <Email  type="password"  value={password} onChange={(e)=>{setPassword(e.target.value)}} feedback={false}  />
+              <div className="df"><LockIcon/><Text1>Password</Text1></div>
+              <div className="df jcsb"><Email type={showPassword ? 'text' : 'password'}  value={password} header={header} footer={footer} onChange={(e)=>{setPassword(e.target.value)}} /><IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  style={{marginRight:"10px"}}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton></div>
                  </SingUpInputStyle>
               </Fileds>
           <SubmitButton 
           onClick={(e)=>{handleLogin()}}
           >LogIn</SubmitButton>
           {isLoading ?
+          
         <div
           style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
+            zIndex: "10",
+position: "fixed",
+backgroundColor:"rgba(0, 0, 0, 0.359)",
+top: "0",
+left: "0",
+width: "100%",
+minHeight: "100vh",
+height: "100%",
+display: "flex",
+flexDirection: "column",
+alignItems: "center",
+justifyContent: "center",
+backdropFilter: "blur(1px)"
           }}
         >
           <MutatingDots
@@ -374,8 +374,8 @@ function Login() {
   ariaLabel="mutating-dots-loading"
   wrapperStyle={{}}
   wrapperClass=""
-  />
-        </div> : ""}
+  /> <div style={{color:"white",fontSize:"20px",marginTop:"10px"}}>Please Wait...</div>
+        </div>: ""}
         </SingUpSection>
       </Section2>
       </Desktop>
@@ -390,9 +390,18 @@ function Login() {
               <div className="df"><EmailIcon/><Text1>Email</Text1></div>
             <Email value={email}  onChange={(e)=>{setEmail(e.target.value)}} />
                  </SingUpInputStyle>
+
+                 
                  <SingUpInputStyle>
-              <div className="df"><PasswordIcon/><Text1>Password</Text1></div>
-              <Email  type="password"  value={password} onChange={(e)=>{setPassword(e.target.value)}} feedback={false}/>
+              <div className="df"><LockIcon/><Text1>Password</Text1></div>
+              <div className="df jcsb"><Email  type={showPassword ? 'text' : 'password'}  value={password} header={header} footer={footer} onChange={(e)=>{setPassword(e.target.value)}} /><IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  style={{marginRight:"10px"}}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton></div>
                  </SingUpInputStyle>
               </Fileds>
               
@@ -403,12 +412,20 @@ function Login() {
           <AlreadyLogin onClick={()=>{navigate("/signup")}}>Don&apos;t have an Account ?</AlreadyLogin>
 
           {isLoading ?
-        <div
+         <div
           style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
+            zIndex: "10",
+position: "fixed",
+top: "0",
+left: "0",
+width: "100%",
+minHeight: "100vh",
+height: "100%",
+display: "flex",
+flexDirection: "column",
+alignItems: "center",
+justifyContent: "center",
+backdropFilter: "blur(2px)"
           }}
         >
           <MutatingDots
@@ -421,8 +438,8 @@ function Login() {
   ariaLabel="mutating-dots-loading"
   wrapperStyle={{}}
   wrapperClass=""
-  />
-        </div> : ""}
+  /> <div style={{color:"white",fontSize:"20px",marginTop:"10px"}}>Please Wait...</div>
+        </div>: ""}
         </SingUpSection>
       </Mobile>
     </Wrapper>

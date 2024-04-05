@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { signUp } from "../Services/application";
 import { ToastContainer,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-// import CircularProgress from '@material-ui/core/CircularProgress';
 import { MutatingDots } from "react-loader-spinner";
 import Header from "../Header";
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import { InputText } from "primereact/inputtext";
 import EmailIcon from '@mui/icons-material/Email';
-import PasswordIcon from '@mui/icons-material/Password';
+import LockIcon from '@mui/icons-material/Lock';
+import IconButton from '@mui/material/IconButton';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Divider } from '@mui/material';
+
 
 
 const Wrapper = styled.div`
@@ -106,18 +110,17 @@ const Fileds = styled.div`
 
 const Email = styled(InputText)`
   border: 0px;
+  font-size: 20px;
   background: transparent;
   padding: 8px 0 0 0;
   margin-left: 30px;
   outline: none;
-  border-bottom: 1px dashed rgb(192, 192, 192); 
+  border-bottom: 1px dashed black; 
   appearance: none;
   opacity: 1;
   color: rgb(82, 83, 84);
-  font-family: "Work Sans";
-  font-size: 15px;
+  font-weight: 500;
   letter-spacing: 0px;
- 
   width: 80%;
   @media (max-width:767px){
     color: black !important;
@@ -128,7 +131,7 @@ const SingUpInputStyle = styled.div`
   margin: 25px 0;
   overflow: hidden;
   opacity: 1;
-  width: 330px;
+  width: 320px;
   border-radius: 10px;
   padding: 15px 0 0 30px;
   outline: none;
@@ -140,6 +143,8 @@ const SingUpInputStyle = styled.div`
     margin: 10px 0;
   }
 `;
+
+
 
 
 const TileDesc = styled.div`
@@ -198,6 +203,8 @@ text-align: center;
 
 const Error=styled.div`
 color:red;
+margin-top:10px;
+font-size: 20px;
 text-align: center;
 `;
 
@@ -239,6 +246,7 @@ function Singup() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [cnfPassword, setcnfPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     const listener = event => {
@@ -290,6 +298,28 @@ function Singup() {
          
    }}
 
+   const header = <div className="font-bold mb-3">Pick a password</div>;
+    const footer = (
+        <>
+            <Divider />
+            <p className="mt-2">Suggestions</p>
+            <ul className="pl-2 ml-2 mt-0 line-height-3">
+                <li>At least one lowercase</li>
+                <li>At least one uppercase</li>
+                <li>At least one numeric</li>
+                <li>Minimum 8 characters</li>
+            </ul>
+        </>
+    );
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+    };
+
+
+
 
   return (
     <>
@@ -316,7 +346,7 @@ function Singup() {
           <Fileds>
            
           
-<div className="df jcsp">
+<div style={{gap:"5%"}} className="df">
   <div>
             <SingUpInputStyle>
               <div className="df"><PersonRoundedIcon/><Text1>Name</Text1></div>
@@ -329,15 +359,29 @@ function Singup() {
             </SingUpInputStyle>
   </div>
   <div>
-            <SingUpInputStyle>
-            <div className="df"><PasswordIcon/><Text1>Password</Text1></div>
-              <Email type="password" value={password} onChange={(e)=>(setPassword(e.target.value))}></Email>
-            </SingUpInputStyle>
+                <SingUpInputStyle>
+              <div className="df"><LockIcon/><Text1>Password</Text1></div>
+              <div className="df jcsb"><Email  type={showPassword ? 'text' : 'password'}  value={password} header={header} footer={footer} onChange={(e)=>{setPassword(e.target.value)}} /><IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  style={{marginRight:"10px",marginTop:"-13px"}}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton></div>
+                 </SingUpInputStyle>
 
-            <SingUpInputStyle>
-            <div className="df"><PasswordIcon/><Text1>Confirm Password</Text1></div>
-              <Email type="password" value={cnfPassword} onChange={(e)=>(setcnfPassword(e.target.value))}  ></Email>
-            </SingUpInputStyle>
+                 <SingUpInputStyle>
+              <div className="df"><LockIcon/><Text1>Confirm Password</Text1></div>
+              <div className="df jcsb"><Email  type={showPassword ? 'text' : 'password'}  value={cnfPassword} header={header} footer={footer} onChange={(e)=>{setcnfPassword(e.target.value)}}/><IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  style={{marginRight:"10px",marginTop:"-13px"}}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton></div>
+                 </SingUpInputStyle>
   </div>
 </div>
           </Fileds>
@@ -346,25 +390,34 @@ function Singup() {
           >Submit</SubmitButton>
           {isLoading ?
         <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
-          }}
-        >
-          <MutatingDots
-  visible={true}
-  height="100"
-  width="100"
-  color="#2C79DF"
-  secondaryColor="#2C79DF"
-  radius="15.5"
-  ariaLabel="mutating-dots-loading"
-  wrapperStyle={{}}
-  wrapperClass=""
-  />
-        </div> : ""}
+        style={{
+          zIndex: "10",
+position: "fixed",
+backgroundColor:"rgba(0, 0, 0, 0.359)",
+top: "0",
+left: "0",
+width: "100%",
+minHeight: "100vh",
+height: "100%",
+display: "flex",
+flexDirection: "column",
+alignItems: "center",
+justifyContent: "center",
+backdropFilter: "blur(1px)"
+        }}
+      >
+        <MutatingDots
+visible={true}
+height="100"
+width="100"
+color="#2C79DF"
+secondaryColor="#2C79DF"
+radius="15.5"
+ariaLabel="mutating-dots-loading"
+wrapperStyle={{}}
+wrapperClass=""
+/> <div style={{color:"white",fontSize:"20px",marginTop:"10px"}}>Please Wait...</div>
+      </div>: ""}
           <Error>{error}</Error>
           
         </SingUpSection>
@@ -386,14 +439,28 @@ function Singup() {
             </SingUpInputStyle>
   
             <SingUpInputStyle>
-            <div className="df"><PasswordIcon/><Text1>Password</Text1></div>
-              <Email type="password" value={password} onChange={(e)=>(setPassword(e.target.value))}></Email>
-            </SingUpInputStyle>
+              <div className="df"><LockIcon/><Text1>Password</Text1></div>
+              <div className="df jcsb"><Email  type={showPassword ? 'text' : 'password'}  value={password} header={header} footer={footer} onChange={(e)=>{setPassword(e.target.value)}} /><IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  style={{marginRight:"10px",marginTop:"-13px"}}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton></div>
+                 </SingUpInputStyle>
 
-            <SingUpInputStyle>
-            <div className="df"><PasswordIcon/><Text1>Confirm Password</Text1></div>
-              <Email type="password" value={cnfPassword} onChange={(e)=>(setcnfPassword(e.target.value))}  ></Email>
-            </SingUpInputStyle>
+                 <SingUpInputStyle>
+              <div className="df"><LockIcon/><Text1>Confirm Password</Text1></div>
+              <div className="df jcsb"><Email  type={showPassword ? 'text' : 'password'}  value={cnfPassword} header={header} footer={footer} onChange={(e)=>{setcnfPassword(e.target.value)}} /><IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  style={{marginRight:"10px",marginTop:"-13px"}}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton></div>
+                 </SingUpInputStyle>
           <SubmitButton 
           onClick={()=>{handlesignUpData()}}
           >Sing Up</SubmitButton>
@@ -404,26 +471,35 @@ function Singup() {
           </div>   
 
           {isLoading ?
-        <div
-          style={{
-            position: "fixed",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%,-50%)",
-          }}
-        >
-          <MutatingDots
-  visible={true}
-  height="100"
-  width="100"
-  color="#2C79DF"
-  secondaryColor="#2C79DF"
-  radius="8.5"
-  ariaLabel="mutating-dots-loading"
-  wrapperStyle={{}}
-  wrapperClass=""
-  />
-        </div> : ""}
+         <div
+         style={{
+           zIndex: "10",
+position: "fixed",
+backgroundColor:"rgba(0, 0, 0, 0.359)",
+top: "0",
+left: "0",
+width: "100%",
+minHeight: "100vh",
+height: "100%",
+display: "flex",
+flexDirection: "column",
+alignItems: "center",
+justifyContent: "center",
+backdropFilter: "blur(1px)"
+         }}
+       >
+         <MutatingDots
+ visible={true}
+ height="100"
+ width="100"
+ color="#2C79DF"
+ secondaryColor="#2C79DF"
+ radius="12.5"
+ ariaLabel="mutating-dots-loading"
+ wrapperStyle={{}}
+ wrapperClass=""
+ /> <div style={{color:"white",fontSize:"20px",marginTop:"10px"}}>Please Wait...</div>
+       </div>: ""}
           <Error>{error}</Error>
           
           </Fileds>

@@ -1,18 +1,9 @@
+/* App.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Rubik+Scribble&display=swap');
+/* The rest of your CSS rules go here */
 *{
+  font-family: "Chakra Petch", sans-serif;
   margin: 0;
   padding: 0;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-   
-;  
-
 }
-/* .page {
-  height: 30px;
-  width: 300px;
-  font-style: italic;
-  margin-top: 20px;
-  text-align: center;
-  padding: 70px 0;
-  font-size: 2rem;
-  font-weight: 800;
-} */

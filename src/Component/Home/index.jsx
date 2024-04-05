@@ -1,19 +1,18 @@
 import React,{useState,useEffect} from 'react'
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components'
+import { styled as MuiStyle } from '@mui/material/styles';
 import Header from '../Header'
 import Footer from '../Footer'
 import { uploadFile,viewApplication} from '../Services/application'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './home.css'
-// import Select from 'react-select';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
-// import { Upload } from '@mui/icons-material';
-
-// import AWS from 'aws-sdk';
+import Button from '@mui/material/Button';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 
 
@@ -41,7 +40,7 @@ margin: 50px;
 z-index: 2;
 
 box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
-background: #99ffff;
+background: #d1ffff;
 padding: 0 50px 50px;
 
 
@@ -65,7 +64,7 @@ position: absolute ;
 top:10;
 left: 10;
 z-index: 2;
-background-color: #99ffff;
+background-color: #D1FFFF;
 @media(max-width: 768px){
     font-size: 20px;
     width: 100%;
@@ -80,7 +79,7 @@ position: absolute ;
 top:10;
 left: 10;
 z-index: 2;
-background-color: #99ffff;
+background-color: #D1FFFF;
 width: 90%;
 margin: 0 auto 10px -10px;
 padding-top: 20px;
@@ -102,7 +101,7 @@ gap: 150px;
 
 const Input = styled(TextField)`
 width: 100%;
-/* margin: 20px 0; */
+
 
 `;
 
@@ -138,7 +137,7 @@ width: 96%;
 const Input2 = styled.input`
 margin: 20px 0;
 height: 100px;
-background: #98FFFF;
+background: #D1FFFF;
 border: none;
 color: #3E6666;
 outline: 1px solid #76C4C5;
@@ -177,7 +176,7 @@ width: 35%;
 `;
 
 
-const Button = styled.button`
+const ApplyButton = styled.button`
 width: max-content;
 padding: 10px 20px;
 background-color: rgb(68, 163, 255);
@@ -199,27 +198,6 @@ color: white;
 
 `;
 
-// const Div = styled.div`
-// display: flex;
-// justify-content: end;
-// `;
-
-// const Select1=styled.select`
-// height:35px;
-// font-size:20px;
-// padding: 0 10px;
-// color: gray;
-// border: 1px solid #d9d9d9;
-// margin-left: 10px;
-// border-radius: 5px;
-// line-height: 50px;
-// outline: none;
-// `;
-
-// const Choice=styled.option`
-// color: gray;
-// `;
-
 const Flex=styled.div`
 width: 50%;
 
@@ -228,30 +206,19 @@ width: 50%;
 }
 `;
 
-const Uploadbutton=styled.div`
-border: 1px solid #76C4C5;
-padding: 5px 10px;
-border-radius: 5px;
-background: #43A3FF;
-color: cyan;
-margin: 20px;
-@media (max-width: 768px){
-  font-size: 12px;
-}
-`;
 
 const Heading=styled.div`
 font-size: 20px;
 color: #43A3FF;
 margin: 20px 0 10px 0;
-font-weight: 200;
+font-weight: 500;
 
 `;
 const Heading2=styled.div`
 font-size: 20px;
 color: #43A3FF;
 margin: 70px 0 20px 0;
-font-weight: 200;
+font-weight: 500;
 
 @media (max-width: 768px){
   margin: 20px 0 0 0;
@@ -284,11 +251,11 @@ function Index() {
     const [bestTimeToReach, setBestTimeToReach] = useState('')
     const [jobprofile, setJobprofile] = useState('UI/UX Developer')
     const [releventexperience, setReleventExperience] = useState('')
-    const [noticeperiod, setNoticePeriod] = useState('')
+    const [noticeperiod, setNoticePeriod] = useState(null)
     const [expectedSalary, setExpectedSalary] = useState('')
     const [currentSalary, setCurrentSalary] = useState('')
     const [noticenegotiable, setNoticeNegotiable] = useState(false)
-    // const [file, setFile] = useState(null)
+
 
     const options = [
       { value: 'React.js', label: 'React.js' },
@@ -303,16 +270,6 @@ function Index() {
     const [selectedOptions, setSelectedOptions] = React.useState([]);
     const [secondaryOptions, setSecondaryOptions] = React.useState([]);
     
-    // const addSecondaryOption = (newOption) => {
-    //   setSecondaryOptions(prevOptions => {
-    //     if (Array.isArray(prevOptions) && prevOptions.length < 3) {
-    //       return [...prevOptions, newOption];
-    //     } else {
-    //       return prevOptions || [];
-    //     }
-    //   });
-    // };
-
     const handleChange = (event,options) => {
       setSelectedOptions(options);
       console.log("selected", selectedOptions);
@@ -426,7 +383,6 @@ function Index() {
     const handleFileChange = (e) => {
       const file = e.target.files[0];
       console.log("filename",file)
-      // return(URL.createObjectURL(file));
       return(file);
     
     
@@ -451,7 +407,17 @@ function Index() {
     { label: 'Other', value: 'Other'},
   ];
 
-
+  const VisuallyHiddenInput = MuiStyle('input')({
+    clip: 'rect(0 0 0 0)',
+    clipPath: 'inset(50%)',
+    height: 1,
+    overflow: 'hidden',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    whiteSpace: 'nowrap',
+    width: 1,
+  });
 
    
   return (
@@ -477,6 +443,7 @@ function Index() {
       id="country-select-demo"
       sx={{ width: "100%",marginTop:"70px",marginBottom:"20px" }}
       options={countries}
+      defaultValue={countries[0]}
       autoHighlight
       getOptionLabel={(option) => option.label}
       renderOption={(props, option) => (
@@ -571,41 +538,51 @@ style={{margin:"20px 0"}}
 
 
 
-          <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Cover letter  </div> 
-          <Uploadbutton  variant="contained" label='My Label' containerElement='label'  component="label">Upload Cover Letter<input type="file"  onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
+          <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px",fontFamily: "Roboto, Helvetica, Arial"}}> Cover letter  </div> 
+          {coverletter.name}
+          <Button
+          style={{backgroundColor:"#42A3FF"}}
+      component="label"
+      role={undefined}
+      variant="contained"
+      tabIndex={-1}
+      startIcon={<CloudUploadIcon />}
+    >
+      Upload file
+      <VisuallyHiddenInput type="file"  onChange={(e)=>{setCoverLetter(handleFileChange(e))}} />
+    </Button>
           </Input4>
             
-          <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px"}}> Resume  </div> 
-          <Uploadbutton  variant="contained" component="label">Upload Resume<input type="file"  onChange={(e)=>{setCoverLetter(handleFileChange(e))}}></input></Uploadbutton>
+          <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px",fontFamily: "Roboto, Helvetica, Arial"}}> Resume  </div> 
+          {resume.name}
+          <Button
+          style={{backgroundColor:"#42A3FF"}}
+      component="label"
+      role={undefined}
+      variant="contained"
+      tabIndex={-1}
+      startIcon={<CloudUploadIcon />}
+    >
+      Upload Resume
+      <VisuallyHiddenInput type="file"  onChange={(e)=>{setResume(handleFileChange(e))}} />
+    </Button>
           </Input4>
           
-     {/* <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setCoverLetter(handleFileChange(e))}} placeholder="Cover Letter"/></Input4> */}
-     {/* <Input4  style={{marginTop:"20px"}} className='df al'><div style={{width:"120px"}}> resume : </div>  <Input style={{marginTop:"30px",outline:"none"}} type="file" onChange={(e)=>{setResume(handleFileChange(e))}} placeholder="Resume" /></Input4> */}
-           
-            
+   
             
         <Heading style={{margin:"35px 0 0 0"}}>Additional Details</Heading>
         <Input style={{margin:"20px 0"}} value={currentSalary} type="text" onChange={(e)=>{setCurrentSalary(e.target.value)}} label="Cureent Salary"/>
         <Input value={expectedSalary} type="text" onChange={(e)=>{setExpectedSalary(e.target.value)}} label="Expected Salary"/>
         
           <Div>
-        {/* <Input4  style={{display:"flex",alignItems:"center",width:"65%",margin:"20px 0"}}>Notice period :
-            <Select1 value={noticeperiod} onChange={(e)=>{setNoticePeriod(e.target.value)}}>
-              <Choice value="0-15 Days">0-15 Days</Choice>
-              <Choice value="15-30 Days">15-30 Days</Choice>
-              <Choice value="30-60 Days">30-60 Days</Choice>
-              <Choice value="60-90 Days">2-3 Months</Choice>
-              <Choice value="More than 90 Days">More Than 3 Months</Choice>
-              <Choice value="Other">Other</Choice>
-            </Select1>
-        </Input4> */}
-
+   
 <Autocomplete
       id="country-select-demo"
       sx={{ width: "100%",marginTop:"20px",marginBottom:"20px" }}
       options={noticePeriods}
       onChange={(event, value) => setNoticePeriod(value)}
       value={noticeperiod}
+      defaultValue="0-15 Days"
       autoHighlight
       getOptionLabel={(option) => option.label}
       renderOption={(props, option) => (
@@ -619,14 +596,14 @@ style={{margin:"20px 0"}}
           label="Notice Period" 
           inputProps={{
             ...params.inputProps,
-            autoComplete: 'new-password', // disable autocomplete and autofill
+            autoComplete: 'new-password',
           }}
         />
       )}
     />
 
         <Input3 className='df'>
-        <div style={{display:"flex",alignItems:"center"}}>Negotiable</div>
+        <div style={{display:"flex",alignItems:"center",fontFamily: "Roboto, Helvetica, Arial" }}>Negotiable</div>
         <input value={noticenegotiable} defaultValue={noticenegotiable} style={{height:"20px",width:"20px",margin:"10px"}}  onChange={(e)=>{setNoticeNegotiable(!noticenegotiable)}} type='checkbox'></input>
         </Input3>
         </Div>
@@ -635,8 +612,8 @@ style={{margin:"20px 0"}}
             <Input value={bestTimeToReach} type="text" onChange={(e)=>{setBestTimeToReach(e.target.value)}} label="Best Time to Reach"/>
             
             
-            <Input2 style={{resize:"none",margin:"20px 0",height:"100px",padding:"10px",fontSize:"17px",background:""}} value={comment} as="textarea" onChange={(e)=>{setComment(e.target.value)}} placeholder="Comments/Remarks"/>
-            <div style={{marginTop:"50px"}} className='df end'><Button onClick={handleSubmit}>Apply</Button></div>
+            <Input2 style={{resize:"none",margin:"20px 0",height:"100px",padding:"10px",fontSize:"17px",fontFamily: "Roboto, Helvetica, Arial"}} value={comment} as="textarea" onChange={(e)=>{setComment(e.target.value)}} placeholder="Comments/Remarks"/>
+            <div style={{marginTop:"50px"}} className='df end'><ApplyButton onClick={handleSubmit}>Apply</ApplyButton></div>
     </Flex>
           </FormContainer>
           <div className='seperetor b m'></div>

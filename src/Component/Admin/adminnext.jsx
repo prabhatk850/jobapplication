@@ -100,9 +100,10 @@ color: white;
 `;
 
 const Hover = styled.div`
-
+color:blue ;
 &:hover{
     cursor: pointer;
+    color: black;
 }
 `;
 
@@ -205,8 +206,8 @@ function handleCopy (e){
 {/* <Input>Coverletter- {coverletter}</Input>
 <Input>Resume- {resume}</Input> */}
 
-            <Div className='df' onClick={() => window.open(coverletter, '_blank')}>Coverletter- <Hover style={{color:"blue"}}>{"View"}</Hover></Div>
-            <Div className='df' onClick={() => window.open(resume, '_blank')}>Resume- <Hover style={{color:"blue"}}>{"View"}</Hover> </Div>
+            <Div className='df' onClick={() => window.open(coverletter, '_blank')}>Coverletter- <Hover>{"View"}</Hover></Div>
+            <Div className='df' onClick={() => window.open(resume, '_blank')}>Resume- <Hover>{"View"}</Hover> </Div>
         
 
 
