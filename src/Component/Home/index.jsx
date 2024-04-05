@@ -327,6 +327,7 @@ function Index() {
 
     useEffect(() => {  
       viewApplication().then((res) => {
+        console.log("name",res)
             setName(res.data.name)
             setEmail(res.data.email)
             setPhoneno(res.data.phoneno)
@@ -539,7 +540,7 @@ style={{margin:"20px 0"}}
 
 
           <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px",fontFamily: "Roboto, Helvetica, Arial"}}> Cover letter  </div> 
-          {coverletter.name}
+          {coverletter?.name}
           <Button
           style={{backgroundColor:"#42A3FF"}}
       component="label"
@@ -554,7 +555,7 @@ style={{margin:"20px 0"}}
           </Input4>
             
           <Input4 style={{marginTop:"20px",display:"flex",justifyContent:"space-between"}} className='df al'><div style={{width:"120px",fontFamily: "Roboto, Helvetica, Arial"}}> Resume  </div> 
-          {resume.name}
+          {resume?.name}
           <Button
           style={{backgroundColor:"#42A3FF"}}
       component="label"

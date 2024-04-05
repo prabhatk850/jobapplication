@@ -78,6 +78,7 @@ const AlreadyLoginSingin = styled.span`
 `;
 const SingUpSection = styled.div`
   padding: 30px 15%;
+  width: 70%;
 `;
 const Title = styled.div`
   font-size: 49px;
@@ -131,7 +132,7 @@ const SingUpInputStyle = styled.div`
   margin: 25px 0;
   overflow: hidden;
   opacity: 1;
-  width: 320px;
+  width: 100%;
   border-radius: 10px;
   padding: 15px 0 0 30px;
   outline: none;
@@ -298,6 +299,32 @@ function Singup() {
          
    }}
 
+   const validatePassword = (password) => {
+    const password1=String(password);
+    const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,}$/;
+
+if (passwordRegex.test(password1)) {
+  setError("");
+  return password1;
+} else {
+  setError("Password is not valid");
+}
+  }
+
+   const validateEmail = (email) => {
+      const email1=String(email);
+      if(email1.toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )){
+        setError("")
+        return email1;
+      }else{
+        setError("Enter valid email")
+      }
+      
+  };
+
    const header = <div className="font-bold mb-3">Pick a password</div>;
     const footer = (
         <>
@@ -346,22 +373,22 @@ function Singup() {
           <Fileds>
            
           
-<div style={{gap:"5%"}} className="df">
+<div style={{gap:"6%"}} className="df">
   <div>
             <SingUpInputStyle>
               <div className="df"><PersonRoundedIcon/><Text1>Name</Text1></div>
             <Email value={name} onChange={(e)=>(setName(e.target.value))} />
                  </SingUpInputStyle>
 
-            <SingUpInputStyle>
+            <SingUpInputStyle >
             <div className="df"><EmailIcon/><Text1>Email</Text1></div>
-              <Email value={email} onChange={(e)=>(setEmail(e.target.value))}></Email>
+              <Email value={email} onChange={(e)=>(setEmail(validateEmail(e.target.value)))}></Email>
             </SingUpInputStyle>
   </div>
   <div>
                 <SingUpInputStyle>
               <div className="df"><LockIcon/><Text1>Password</Text1></div>
-              <div className="df jcsb"><Email  type={showPassword ? 'text' : 'password'}  value={password} header={header} footer={footer} onChange={(e)=>{setPassword(e.target.value)}} /><IconButton
+              <div className="df jcsb"><Email  type={showPassword ? 'text' : 'password'}  value={password} header={header} footer={footer} onChange={(e)=>{setPassword(validatePassword(e.target.value))}} /><IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
