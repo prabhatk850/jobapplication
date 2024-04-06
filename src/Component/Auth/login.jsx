@@ -113,7 +113,7 @@ const Email = styled(InputText)`
 `;
 const SingUpInputStyle = styled.div`
   height: 70px;
-  margin: 5px 0;
+  margin: 12px 0;
   overflow: hidden;
   opacity: 1;
   border-radius: 10px;
