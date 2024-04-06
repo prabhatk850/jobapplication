@@ -132,9 +132,9 @@ const SingUpInputStyle = styled.div`
   margin: 25px 0;
   overflow: hidden;
   opacity: 1;
-  width: 100%;
+  width: 90%;
   border-radius: 10px;
-  padding: 15px 0 0 30px;
+  padding: 10px 5%;
   outline: none;
   background-color:cyan;
   /* border-bottom: 1px solid rgb(192, 192, 192); */
@@ -165,6 +165,7 @@ const SubmitButton = styled.button`
   cursor: pointer;
    @media (max-width: 767px){
      margin: 40px 0 0 0;
+     width: 100%;
   }
 `;
 
@@ -373,8 +374,8 @@ if (passwordRegex.test(password1)) {
           <Fileds>
            
           
-<div style={{gap:"6%"}} className="df">
-  <div>
+<div style={{width:"100%",justifyContent:"space-between"}} className="df">
+  <div style={{width:"48%"}}>
             <SingUpInputStyle>
               <div className="df"><PersonRoundedIcon/><Text1>Name</Text1></div>
             <Email value={name} onChange={(e)=>(setName(e.target.value))} />
@@ -385,14 +386,14 @@ if (passwordRegex.test(password1)) {
               <Email value={email} onChange={(e)=>(setEmail(validateEmail(e.target.value)))}></Email>
             </SingUpInputStyle>
   </div>
-  <div>
+  <div style={{width:"48%"}}>
                 <SingUpInputStyle>
               <div className="df"><LockIcon/><Text1>Password</Text1></div>
               <div className="df jcsb"><Email  type={showPassword ? 'text' : 'password'}  value={password} header={header} footer={footer} onChange={(e)=>{setPassword(validatePassword(e.target.value))}} /><IconButton
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  style={{marginRight:"10px",marginTop:"-13px"}}
+                 
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton></div>
@@ -404,7 +405,6 @@ if (passwordRegex.test(password1)) {
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  style={{marginRight:"10px",marginTop:"-13px"}}
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton></div>
@@ -412,9 +412,11 @@ if (passwordRegex.test(password1)) {
   </div>
 </div>
           </Fileds>
-          <SubmitButton 
+          {/* <div style={{justifyContent:"center"}} className="df"> */}
+            <SubmitButton 
           onClick={()=>{handlesignUpData()}}
           >Submit</SubmitButton>
+          {/* </div> */}
           {isLoading ?
         <div
         style={{
@@ -471,7 +473,6 @@ wrapperClass=""
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  style={{marginRight:"10px",marginTop:"-13px"}}
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton></div>
@@ -483,7 +484,6 @@ wrapperClass=""
                   aria-label="toggle password visibility"
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPassword}
-                  style={{marginRight:"10px",marginTop:"-13px"}}
                 >
                   {showPassword ? <VisibilityOff /> : <Visibility />}
                 </IconButton></div>
